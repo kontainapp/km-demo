@@ -54,7 +54,7 @@ build/demo: TARGET_JAR_PATH := $(shell realpath --canonicalize-missing --relativ
 build/demo: clean/image
 	docker build -t ${DEMO_IMAGE} --build-arg TARGET_JAR_PATH=${TARGET_JAR_PATH} -f kontain.dockerfile ${CURRENT_DIR}
 
-run_demo = ${DOCKER_RUN} ${DOCKER_KRUN_RUNTIME} -d -v $$(pwd):/mnt:z -p ${DEFAULT_DEMO_PORT}:8080 --name ${DEMO_CONTAINER} ${DEMO_IMAGE} /run.sh
+run_demo = docker run --rm --runtime=krun -d -v $$(pwd):/mnt:z -p ${DEFAULT_DEMO_PORT}:8080 --name ${DEMO_CONTAINER} ${DEMO_IMAGE} /run.sh
 .PHONY: run/demo
 run/demo:
 	$(call run_demo)
