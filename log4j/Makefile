@@ -19,3 +19,10 @@ all:
 	make -C dialback-metasploit
 	docker build log4shell-vulnerable-app/ -t vulnerable-app-kontain -f log4shell-vulnerable-app/Dockerfile.kontain
 	docker build log4shell-vulnerable-app/ -t vulnerable-app
+
+demo:
+	cd JNDI-Exploit-Kit && mvn clean package -DskipTests && docker build -t log4jshell/jndi_exploit_kit .
+	cd dialback-metasploit && docker rm -f msfvenom && docker build -t log4jshell/msfvenom .
+	cd log4shell-vulnerable-app/ && docker build -t log4jshell/vulnerable-app . 
+	cd log4shell-vulnerable-app/ && docker build -t log4jshell/vulnerable-app-kontain -f Dockerfile.kontain .
+	cp msfvenom.sh /tmp/
