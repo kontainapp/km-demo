@@ -2,7 +2,9 @@
 	path = log4j/JNDI-Exploit-Kit
 	url = git@github.com:kontainapp/JNDI-Exploit-Kit.git
 	branch = kontain
+	ignore = dirty
 [submodule "log4j/log4shell-vulnerable-app"]
 	path = log4j/log4shell-vulnerable-app
 	url = git@github.com:kontainapp/log4shell-vulnerable-app.git
 	branch = kontain
+	ignore = dirty
