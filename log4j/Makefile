@@ -21,6 +21,7 @@ all:
 	docker build log4shell-vulnerable-app/ -t vulnerable-app
 
 demo:
+        cd dialback-metasploit && aws s3 cp s3://guide-assets/downloads/metasploit-framework-6.1.22%2B20211228112552~1rapid7-1.el6.x86_64.rpm
 	cd JNDI-Exploit-Kit && cp ../Dockerfile.JNDIExploit-kit ./Dockerfile && mvn clean package -DskipTests && docker build -t log4jshell/jndi_exploit_kit .
 	cd dialback-metasploit && docker rm -f msfvenom && docker build -t log4jshell/msfvenom .
 	cd log4shell-vulnerable-app/ && docker build -t log4jshell/vulnerable-app . 
