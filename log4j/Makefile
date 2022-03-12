@@ -21,7 +21,7 @@ all:
 	docker build log4shell-vulnerable-app/ -t vulnerable-app
 
 demo:
-	cd JNDI-Exploit-Kit && cp ../Dockerfile.JNDIExploit-kit . && mvn clean package -DskipTests && docker build -t log4jshell/jndi_exploit_kit .
+	cd JNDI-Exploit-Kit && cp ../Dockerfile.JNDIExploit-kit ./Dockerfile && mvn clean package -DskipTests && docker build -t log4jshell/jndi_exploit_kit .
 	cd dialback-metasploit && docker rm -f msfvenom && docker build -t log4jshell/msfvenom .
 	cd log4shell-vulnerable-app/ && docker build -t log4jshell/vulnerable-app . 
 	cd log4shell-vulnerable-app/ && docker build -t log4jshell/vulnerable-app-kontain -f Dockerfile.kontain .
