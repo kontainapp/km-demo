@@ -14,7 +14,7 @@
 # limitations under the License.
 #
 
-FROM fedora
+FROM fedora:35
 ARG RPM=metasploit-framework-6.1.22%2B20211228112552~1rapid7-1.el6.x86_64.rpm
 
 EXPOSE 8081

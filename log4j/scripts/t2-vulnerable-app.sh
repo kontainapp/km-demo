@@ -1,1 +1,1 @@
-docker run --rm --network=host vulnerable-app
+docker run --rm --network=host log4shell/vulnerable-app
