@@ -1,8 +1,11 @@
+# Explanation of Log4Shell Attack
+https://securityboulevard.com/2021/12/log4shell-jndi-injection-via-attackable-log4j/
+
 # log4j km-demo
 
 [https://www.reposhub.com/java/web-frameworks/twseptian-Spring-Boot-Log4j-CVE-2021-44228-Docker-Lab.html](https://www.reposhub.com/java/web-frameworks/twseptian-Spring-Boot-Log4j-CVE-2021-44228-Docker-Lab.html)
 
-ensure that java and mvn are installed prior to this
+- ensure that JDK 11 and Maven are installed prior to this
 
 **clone:**
 
