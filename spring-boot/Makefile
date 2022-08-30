@@ -41,7 +41,7 @@ ${SRC_REPO_DIR}:
 BUILDER_CONTAINER := spring-boot-demo-builder
 ${APP_JAR}:
 	$(call clean_container,${BUILDER_CONTAINER})
-	docker run --rm -it -d -v ${SRC_REPO_DIR}:/app:z --name ${BUILDER_CONTAINER} java
+	docker run --rm -it -d -v ${SRC_REPO_DIR}:/app:z --name ${BUILDER_CONTAINER} openjdk:8u342-jdk
 	docker exec -w /app/complete -u $(shell id -u):$(shell id -g) ${BUILDER_CONTAINER} ./gradlew build
 	$(call clean_container,${BUILDER_CONTAINER})
 
