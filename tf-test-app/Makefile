@@ -35,7 +35,7 @@ kontainer-snap: container
 kontainer: container
 	docker build -t test-app-k -f Dockerfile.kontain .
 
-container: ${BUILD_TF}/${TF}
+container: # ${BUILD_TF}/${TF}
 	docker build -t test-app --build-arg TF=${TF} .
 
 podman:

@@ -19,7 +19,7 @@ docker run -v $(pwd)/tmp:/mnt:Z --name test-app --rm -it -p 5000:5000 test-app /
 To do the same in kontainer:
 
 ```bash
-make container
+make kontainer
 docker run --runetime=krun -v $(pwd)/tmp:/mnt:Z --name test-app --rm -it -p 5000:5000 test-app-k /bin/sh
 ```
 

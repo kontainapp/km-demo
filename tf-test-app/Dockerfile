@@ -27,6 +27,6 @@ RUN groupadd -f -g $GID $USERNAME && useradd -u $UID -g $GID -d /home/$USERNAME 
 RUN dnf install -y pip
 USER $USERNAME
 WORKDIR /home/$USERNAME
-COPY app.py requirements.txt build_tensorflow/${TF} /home/$USERNAME/
-RUN pip install --user wheel && pip install --user -r requirements.txt && pip install --user ${TF}
-RUN rm requirements.txt ${TF}
+COPY app.py requirements.txt /home/$USERNAME/
+# RUN pip install --user -r requirements.txt
+# RUN rm requirements.txt

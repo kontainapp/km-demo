@@ -2,7 +2,7 @@ numpy==1.21.0
 h5py
 six~=1.15.0
 keras
-# tensorflow
+tensorflow~=2.7.0
 flask
 gevent
 pillow
