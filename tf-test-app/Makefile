@@ -18,14 +18,29 @@
 
 BUILD_TF := build_tensorflow
 TF := tensorflow-2.7.0-cp39-cp39-linux_x86_64.whl
+MGMTPIPE := /mnt/km.sock
+MGMTPIPE_HOST := tmp/km.sock
+
+kontainer-snap: container
+	@rm -rf ${MGMTPIPE_HOST}
+	docker run --runtime=krun -v $$(pwd)/tmp:/mnt:rw \
+		--name test-app-k --rm -d -p 5000:5000 --env=KM_MGTPIPE=${MGMTPIPE} test-app-k
+	curl --retry-all-errors  --retry 30 --retry-delay 1 --silent -X POST -F image=@dog2.jpg http://localhost:5000/predict | jq .
+	/opt/kontain/bin/km_cli -s ${MGMTPIPE_HOST} -t
+	while [ -n "$(docker ps -f name=test-app-k -q)" ]; do sleep 1; done
+	chmod +rx tmp/kmsnap
+	@rm -rf ${MGMTPIPE_HOST}
+	docker build -t test-app-snap-k -f Dockerfile_snap.kontain .
 
 kontainer: container
 	docker build -t test-app-k -f Dockerfile.kontain .
-	@echo "Run 'docker run --runtime=krun --name test-app-k --rm -it -p 5000:5000 test-app-k /bin/sh' to login into kontainer"
 
 container: ${BUILD_TF}/${TF}
 	docker build -t test-app --build-arg TF=${TF} .
-	@echo "Run 'docker run --name test-app --rm -it -p 5000:5000 test-app /bin/sh' to login into container"
+
+podman:
+	podman pull docker-daemon:test-app-k:latest
+	podman pull docker-daemon:test-app-snap-k:latest
 
 ${BUILD_TF}/${TF}:
 	make -C ${BUILD_TF}

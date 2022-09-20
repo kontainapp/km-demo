@@ -27,7 +27,7 @@ COPY --from=app /etc/pki /etc/pki/
 COPY --from=app /etc/ssl /etc/ssl/
 USER appuser
 ENV HOME /home/$USERNAME
-WORKDIR $HOME
+WORKDIR /mnt
 COPY --chown=$UID:$GID run.sh run_snap.sh /
 COPY --from=app --chown=$UID:$GID $HOME $HOME/
-CMD [ "./app.py" ]
+CMD [ "/home/appuser/app.py" ]
