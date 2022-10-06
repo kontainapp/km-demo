@@ -18,5 +18,5 @@ ARG TARGET_JAR_PATH
 COPY ${TARGET_JAR_PATH} /app.jar
 COPY run.sh run_snap.sh /
 EXPOSE 8080/tcp
-ENV KM_MGTPIPE=/tmp/km.sock
+WORKDIR /mnt
 CMD ["java", "-XX:-UseCompressedOops", "-jar", "/app.jar"]
