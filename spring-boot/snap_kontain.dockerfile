@@ -14,8 +14,7 @@
 # limitations under the License.
 #
 FROM kontainapp/spring-boot-demo
-ARG TARGET_SNAP=kmsnap
+ARG TARGET_SNAP=tmp/kmsnap
 COPY ${TARGET_SNAP} /kmsnap
 EXPOSE 8080/tcp
-ENV KM_MGTPIPE=/tmp/km.snap_sock
 CMD ["/kmsnap"]

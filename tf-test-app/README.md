@@ -19,8 +19,8 @@ docker run -v $(pwd)/tmp:/mnt:Z --name test-app --rm -it -p 5000:5000 test-app /
 To do the same in kontainer:
 
 ```bash
-make container
-docker run --runetime=krun -v $(pwd)/tmp:/mnt:Z --name test-app --rm -it -p 5000:5000 test-app-k /bin/sh
+make kontainer
+docker run --runtime=krun -v $(pwd)/tmp:/mnt:Z --name test-app --rm -it -p 5000:5000 test-app-k /bin/sh
 ```
 
 ## To test:
@@ -73,13 +73,13 @@ If everything is OK, it prints something like:
 
 reporting probabilities that the presented image (`dog2.jpg`) is image of the particular dog breed.
 
-## snapshot
+## Manual Snapshot
 
 Run kontainer the same way as above:
 
 ```bash
-docker run --runtime=krun -v /opt/kontain/bin/km_cli:/opt/kontain/bin/km_cli \
-  -v $(pwd)/tmp:/mnt:rw --name test-app --rm -it -p 5000:5000 test-app /bin/sh
+docker run --runtime=krun -v $(pwd)/tmp:/mnt:rw \
+		--name test-app-k --rm -d -p 5000:5000 --env=KM_MGTPIPE=${MGMTPIPE} test-app-k
 ```
 
 On the host, run

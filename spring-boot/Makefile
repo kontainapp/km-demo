@@ -46,7 +46,10 @@ ${APP_JAR}:
 	$(call clean_container,${BUILDER_CONTAINER})
 
 DEMO_IMAGE ?= kontainapp/spring-boot-demo
+DEMO_SNAP_IMAGE ?= kontainapp/spring-boot-demo-snap
 DEMO_CONTAINER ?= kontainapp_sprint_boot_demo
+MGMTPIPE := /mnt/km.sock
+MGMTPIPE_HOST := tmp/km.sock
 
 .PHONY: build/demo
 # Docker requires relative path to the building context
@@ -58,6 +61,18 @@ run_demo = docker run --rm --runtime=krun -d -v $$(pwd):/mnt:z -p ${DEFAULT_DEMO
 .PHONY: run/demo
 run/demo:
 	$(call run_demo)
+
+build/snap: build/demo
+	@rm -rf ${MGMTPIPE_HOST}
+	docker run --runtime=krun -v $$(pwd)/tmp:/mnt:rw -u $$(id -u):$$(id -g) \
+		--name ${DEMO_CONTAINER} --rm -d -p 8080:8080 --env=KM_MGTPIPE=${MGMTPIPE} ${DEMO_IMAGE}
+	curl --retry-all-errors  --retry 30 --retry-delay 1 --silent http://localhost:8080/greeting | jq .
+	sleep 1
+	/opt/kontain/bin/km_cli -s ${MGMTPIPE_HOST} -t
+	while [ -n "$(docker ps -f name=${DEMO_CONTAINER} -q)" ]; do sleep 0.1; done
+	chmod +rx tmp/kmsnap
+	@rm -rf ${MGMTPIPE_HOST}
+	docker build -t ${DEMO_SNAP_IMAGE} -f snap_kontain.dockerfile .
 
 .PHONY: clean/build
 clean/build:
@@ -90,3 +105,7 @@ DEMO_IMAGE_REG := $(subst kontainapp/,$(REGISTRY)/,$(DEMO_IMAGE))
 publish-demo: ## publish to docker.io (requred login)
 	$(MAKE) MAKEFLAGS="$(MAKEFLAGS)" .push-image \
 		FROM=$(DEMO_IMAGE) TO=$(DEMO_IMAGE_REG)
+
+podman:
+	podman pull docker-daemon:${DEMO_IMAGE}:latest
+	podman pull docker-daemon:${DEMO_SNAP_IMAGE}:latest
