@@ -16,4 +16,4 @@
 #
 #
 echo > /mnt/start_time
-./kmsnap
+/kmsnap

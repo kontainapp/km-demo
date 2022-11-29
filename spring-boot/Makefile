@@ -47,7 +47,8 @@ ${APP_JAR}:
 
 DEMO_IMAGE ?= kontainapp/spring-boot-demo
 DEMO_SNAP_IMAGE ?= kontainapp/spring-boot-demo-snap
-DEMO_CONTAINER ?= kontainapp_sprint_boot_demo
+DEMO_CONTAINER ?= kontainapp_spring_boot_demo
+DEMO_SNAP_CONTAINER ?= kontainapp_spring_boot_demo_snap
 MGMTPIPE := /mnt/km.sock
 MGMTPIPE_HOST := tmp/km.sock
 
@@ -62,11 +63,16 @@ run_demo = docker run --rm --runtime=krun -d -v $$(pwd):/mnt:z -p ${DEFAULT_DEMO
 run/demo:
 	$(call run_demo)
 
+run_snap_demo = docker run --rm --runtime=krun -d -p ${DEFAULT_DEMO_PORT}:8080 --name ${DEMO_SNAP_CONTAINER} ${DEMO_SNAP_IMAGE} /run_snap.sh
+.PHONY: run/snap_demo
+run/snap_demo:
+	$(call run_snap_demo)
+
 build/snap: build/demo
 	@rm -rf ${MGMTPIPE_HOST}
 	docker run --runtime=krun -v $$(pwd)/tmp:/mnt:rw -u $$(id -u):$$(id -g) \
 		--name ${DEMO_CONTAINER} --rm -d -p 8080:8080 --env=KM_MGTPIPE=${MGMTPIPE} ${DEMO_IMAGE}
-	curl --retry-all-errors  --retry 30 --retry-delay 1 --silent http://localhost:8080/greeting | jq .
+	curl --retry-all-errors  --retry 60 --retry-delay 1 --silent http://localhost:8080/greeting | jq .
 	sleep 1
 	/opt/kontain/bin/km_cli -s ${MGMTPIPE_HOST} -t
 	while [ -n "$(docker ps -f name=${DEMO_CONTAINER} -q)" ]; do sleep 0.1; done
