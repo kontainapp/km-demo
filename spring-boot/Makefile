@@ -63,7 +63,7 @@ run/demo:
 	$(call run_demo)
 
 build/snap: build/demo
-	@rm -rf ${MGMTPIPE_HOST}
+	@rm -rf ${MGMTPIPE_HOST}; mkdir -p tmp; sudo chmod a+rwx tmp
 	docker run --runtime=krun -v $$(pwd)/tmp:/mnt:rw -u $$(id -u):$$(id -g) \
 		--name ${DEMO_CONTAINER} --rm -d -p 8080:8080 --env=KM_MGTPIPE=${MGMTPIPE} ${DEMO_IMAGE}
 	curl --retry-all-errors  --retry 30 --retry-delay 1 --silent http://localhost:8080/greeting | jq .
