@@ -23,7 +23,7 @@ TF := tensorflow-2.7.0-cp39-cp39-linux_x86_64.whl
 MGMTPIPE := /mnt/km.sock
 MGMTPIPE_HOST := tmp/km.sock
 
-kontainer-snap: container
+kontainer-snap: kontainer
 	@rm -rf ${MGMTPIPE_HOST}
 	docker run --runtime=krun -v $$(pwd)/tmp:/mnt:rw \
 		--name test-app-k --rm -d -p 5000:5000 --env=KM_MGTPIPE=${MGMTPIPE} test-app-k
@@ -31,7 +31,7 @@ kontainer-snap: container
 	jq . /tmp/out.json
 	sudo /opt/kontain/bin/km_cli -s ${MGMTPIPE_HOST} -t
 	while [ -n "$(docker ps -f name=test-app-k -q)" ]; do sleep 1; done
-	sudo chmod +rx tmp/kmsnap
+	sudo chmod -R +rwx tmp
 	@rm -rf ${MGMTPIPE_HOST}
 	docker build -t test-app-snap-k -f Dockerfile_snap.kontain .
 
