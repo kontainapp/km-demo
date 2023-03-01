@@ -13,6 +13,7 @@ GPATH
 GRTAGS
 kmcore
 kmsnap
+tmp
 cscope.out
 **/cscope.out
 .vscode/tags

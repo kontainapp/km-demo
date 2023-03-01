@@ -13,7 +13,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-FROM kontainapp/spring-boot-demo
+ARG BASE_IMAGE=tmp:tmp
+
+FROM ${BASE_IMAGE}
 ARG TARGET_SNAP=tmp/kmsnap
 COPY ${TARGET_SNAP} /kmsnap
 EXPOSE 8080/tcp
