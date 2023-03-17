@@ -26,7 +26,7 @@ MGMTPIPE_HOST := tmp/km.sock
 kontainer-snap: kontainer
 	@rm -rf ${MGMTPIPE_HOST}
 	docker run --runtime=krun -v $$(pwd)/tmp:/mnt:rw \
-		--name test-app-k --rm -d -p 5000:5000 --env=KM_MGTPIPE=${MGMTPIPE} test-app-k
+		--name test-app-k -d -p 5000:5000 --env=KM_MGTPIPE=${MGMTPIPE} test-app-k
 	until $$(curl --output /tmp/out.json --silent --fail -X POST -F image=@dog2.jpg 'http://localhost:5000/predict'); do sleep 0.1; done
 	jq . /tmp/out.json
 	sudo /opt/kontain/bin/km_cli -s ${MGMTPIPE_HOST} -t
@@ -34,6 +34,7 @@ kontainer-snap: kontainer
 	sudo chmod -R +rwx tmp
 	@rm -rf ${MGMTPIPE_HOST}
 	docker build -t test-app-snap-k -f Dockerfile_snap.kontain .
+	docker rm -f test-app-k
 
 kontainer: container
 	docker build -t test-app-k -f Dockerfile.kontain .
