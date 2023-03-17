@@ -1,4 +1,5 @@
 numpy==1.21.0
+protobuf~=3.20.1
 h5py
 six~=1.15.0
 keras

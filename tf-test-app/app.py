@@ -29,6 +29,10 @@ def load_model():
 	global model
 	model = ResNet50(weights="imagenet")
 
+	image = Image.open("/tmp/dog.jpg")
+	image = prepare_image(image, target=(224, 224))
+	model.predict(image)
+
 def prepare_image(image, target):
 	# if the image mode is not RGB, convert it
 	if image.mode != "RGB":
