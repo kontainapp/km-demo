@@ -20,12 +20,12 @@
 
 FROM fedora:34 as app
 ARG TF=tensorflow-2.4.1-cp38-cp38-linux_x86_64.whl
-ARG UID=1001
-ARG GID=117
+# ARG UID=1001
+# ARG GID=117
 ARG USERNAME=appuser
-RUN groupadd -f -g $GID $USERNAME && useradd -u $UID -g $GID -d /home/$USERNAME $USERNAME
+# RUN groupadd -f -g $GID $USERNAME && useradd -u $UID -g $GID -d /home/$USERNAME $USERNAME
 RUN dnf install -y pip
-USER $USERNAME
+# USER $USERNAME
 WORKDIR /home/$USERNAME
 COPY app.py requirements.txt build_tensorflow/${TF} /home/$USERNAME/
 RUN pip install --user wheel && pip install --user -r requirements.txt && pip install --user ${TF}

@@ -19,16 +19,18 @@
 FROM test-app as app
 
 FROM kontainapp/runenv-dynamic-python
-ARG UID=1001
-ARG GID=117
+# ARG UID=1001
+# ARG GID=117
 ARG USERNAME=appuser
 COPY --from=app /etc/passwd /etc/
 COPY --from=app /etc/pki /etc/pki/
 COPY --from=app /etc/ssl /etc/ssl/
-USER appuser
+# USER appuser
 ENV HOME /home/$USERNAME
 WORKDIR /mnt
-COPY --chown=$UID:$GID run.sh run_snap.sh /
-COPY --from=app --chown=$UID:$GID $HOME $HOME/
+# COPY --chown=$UID:$GID run.sh run_snap.sh /
+# COPY --from=app --chown=$UID:$GID $HOME $HOME/
+COPY run.sh run_snap.sh /
+COPY --from=app $HOME $HOME/
 COPY tmp/kmsnap $HOME/
 CMD [ "/home/appuser/kmsnap" ]
