@@ -24,6 +24,7 @@ app = Flask(__name__)
 
 # Create HuggingFace Sentiment Analysis Pipeline
 classifier = pipeline('sentiment-analysis')
+classifier('xxx')
 
 @app.route('/query')
 def query_example():
