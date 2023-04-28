@@ -15,8 +15,45 @@
 #
 
 DEMO_IMAGE ?= kontainapp/pytorch-demo-cpu
+SNAP_IMAGE ?= kontainapp/pytorch-demo-cpu-snap
+DEMO_CONTAINER ?= kontainapp_pytorch_demo
 
-all: build-demo
+INTERIM_IMAGE := tmp:$(shell echo $$BASHPID)
+MGTDIR := /mnt
+MGTDIR_HOST := tmp
 
-build-demo:
+MGMTPIPE_HOST := tmp/kmpipe.python3*.1
+MGMTSNAP_HOST := tmp/kmsnap.python3*.1
+
+all: build-snap
+
+build-demo: huggingface/transformers
 	docker build -t ${DEMO_IMAGE} -f Dockerfile .
+
+huggingface/transformers:
+	mkdir -p huggingface
+	docker build -t ${INTERIM_IMAGE} -f Dockerfile .
+	docker run -d --rm --name ${DEMO_CONTAINER} -p 8080:8080 ${INTERIM_IMAGE}
+	curl --retry-all-errors --retry 300 --retry-delay 1 --get --data-urlencode "data=this is a good piece of cake" http://127.0.0.1:8080/query
+	docker cp ${DEMO_CONTAINER}:/root/.cache/huggingface .
+	docker rm -f ${DEMO_CONTAINER}
+	docker rmi ${INTERIM_IMAGE}
+
+build-snap: build-demo
+	@rm -rf ${MGMTPIPE_HOST}; mkdir -p tmp; sudo chmod a+rwx tmp
+	docker run --runtime=krun -v $$(pwd)/tmp:/mnt:rw \
+		--name ${DEMO_CONTAINER} -d -p 8080:8080 --env=KM_MGTDIR=${MGTDIR} ${DEMO_IMAGE}
+	curl --retry-all-errors --retry 30 --retry-delay 1 --get --data-urlencode "data=this is a good piece of cake" http://127.0.0.1:8080/query
+	sleep 1
+	sudo /opt/kontain/bin/km_cli -s ${MGMTPIPE_HOST} -t
+	while [ -n "$(docker ps -f name=${DEMO_CONTAINER} -q)" ]; do sleep 0.1; done
+	rm -f ${MGMTPIPE_HOST} ${MGTDIR_HOST}/kmsnap.*.conf
+	sudo chmod +rx $(shell echo ${MGMTSNAP_HOST})
+	docker export ${DEMO_CONTAINER} | docker import - ${INTERIM_IMAGE}
+	docker build -t ${SNAP_IMAGE} --build-arg BASE_IMAGE=${INTERIM_IMAGE} --build-arg TARGET_SNAP=$(shell echo ${MGMTSNAP_HOST}) -f Dockerfile.snap .
+	docker rm -f ${DEMO_CONTAINER}
+	docker rmi -f ${INTERIM_IMAGE}
+
+podman:	
+	podman pull docker-daemon:${DEMO_IMAGE}:latest
+	podman pull docker-daemon:${SNAP_IMAGE}:latest

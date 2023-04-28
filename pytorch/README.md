@@ -14,17 +14,17 @@ docker run --rm -p 8080:8080 kontainapp/pytorch-demo-cpu
 
 Example query:
 ```
-curl --get --data-urlencode "data=this is a good piece of cake" http://127.0.0.1:8080/query-example
+curl --get --data-urlencode "data=this is a good piece of cake" http://127.0.0.1:8080/query
 ```
 Example output:
 ```
 {'label': 'POSITIVE', 'score': 0.9998551607131958}
 ```
 
-Probably the biggest contrivence here is the base HuggingFace pre-trained model is downloaded
+Probably the biggest contrivance here is the base HuggingFace pre-trained model is downloaded
 into the container whenever the container is started. A smarter Dockerfile would download the model
 to the container as part of the container build process. Note: until this is fixed it is going to
-snapshots the appearence of an unfair advantage.
+snapshots the appearance of an unfair advantage.
 
 # Background
 
