@@ -43,7 +43,7 @@ build-snap: build-demo
 	@rm -rf ${MGMTPIPE_HOST}; mkdir -p tmp; sudo chmod a+rwx tmp
 	docker run --runtime=krun -v $$(pwd)/tmp:/mnt:rw \
 		--name ${DEMO_CONTAINER} -d -p 5000:5000 --env=KM_MGTDIR=${MGTDIR} ${DEMO_IMAGE}
-	curl --retry-all-errors --retry 30 --retry-delay 1 --get --data-urlencode "data=this is a good piece of cake" http://127.0.0.1:5000/query
+	curl --retry-all-errors --retry 300 --retry-delay 1 -XGET -H "Content-Type: application/json" -H "Accept: application/json" http://localhost:5000/predict -d '{"content":"The dog is very polite"}'
 	sleep 1
 	sudo /opt/kontain/bin/km_cli -s ${MGMTPIPE_HOST} -t
 	while [ -n "$(docker ps -f name=${DEMO_CONTAINER} -q)" ]; do sleep 0.1; done
