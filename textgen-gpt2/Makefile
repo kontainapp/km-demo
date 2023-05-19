@@ -14,9 +14,9 @@
 # limitations under the License.
 #
 
-DEMO_IMAGE ?= kontainapp/sentiment-demo
-SNAP_IMAGE ?= kontainapp/sentiment-demo-snap
-DEMO_CONTAINER ?= kontainapp_sentiment_deo
+DEMO_IMAGE ?= kontainapp/gpt2-demo
+SNAP_IMAGE ?= kontainapp/gpt2-demo-snap
+DEMO_CONTAINER ?= kontainapp_gpt2_demo
 
 INTERIM_IMAGE := tmp:$(shell echo $$BASHPID)
 MGTDIR := /mnt
