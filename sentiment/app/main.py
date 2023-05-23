@@ -1,3 +1,4 @@
+import torch
 from flask import Flask, jsonify, request  # import objects from the Flask model
 # from keras.models import load_model
 from transformers import AutoTokenizer, AutoModelForSequenceClassification, TextClassificationPipeline
@@ -16,7 +17,8 @@ tokenizer = AutoTokenizer.from_pretrained("distilbert-base-uncased-finetuned-sst
 model = AutoModelForSequenceClassification.from_pretrained(
     "distilbert-base-uncased-finetuned-sst-2-english")
 
-pipe = TextClassificationPipeline(model=model, tokenizer=tokenizer)
+device = "cuda:0" if torch.cuda.is_available() else "cpu"
+pipe = TextClassificationPipeline(model=model, tokenizer=tokenizer, device=device)
 
 @app.route('/predict', methods=['GET'])
 def predict():

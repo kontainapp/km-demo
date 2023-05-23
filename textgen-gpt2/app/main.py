@@ -1,6 +1,7 @@
 from flask import Flask, jsonify, request  # import objects from the Flask model
 # from keras.models import load_model
 #from transformers import AutoTokenizer, AutoModelForSequenceClassification, TextClassificationPipeline
+import torch
 from transformers import pipeline, set_seed
 
 # import torch
@@ -10,7 +11,8 @@ app = Flask(__name__)  # define app using Flask
 # model = load_model('./tf_model.h5')
 
 # NO PYTORCH
-generator = pipeline('text-generation', model='gpt2')
+device = "cuda:0" if torch.cuda.is_available() else "cpu"
+generator = pipeline('text-generation', model='gpt2', device=device)
 
 @app.route('/predict', methods=['GET'])
 def predict():
