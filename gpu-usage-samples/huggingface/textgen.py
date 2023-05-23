@@ -1,7 +1,17 @@
 import torch
 from transformers import pipeline
 
-device = "cuda:0" if torch.cuda.is_available() else "cpu"
+from torch import mps
+
+device = (
+    "cuda"
+    if torch.cuda.is_available()
+    else "mps"
+    if torch.backends.mps.is_available()
+    else "cpu"
+)
+
+print(f"Using {device} device")
 
 generator = pipeline("text-generation", model="distilgpt2", device=device)
 output=generator(
