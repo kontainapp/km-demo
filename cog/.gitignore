@@ -1,0 +1,12 @@
+__pycache__/
+.venv
+response.json
+.tgz
+.tar
+.cog/
+pretrained/
+weights/
+diffusers-cache/
+.vscode/
+.png
+images/

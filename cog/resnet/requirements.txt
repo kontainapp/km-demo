@@ -1,0 +1,8 @@
+cog
+torch
+torchvision
+torchtext
+transformers
+sentencepiece
+sacremoses
+importlib_metadata

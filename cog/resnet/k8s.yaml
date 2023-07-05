@@ -1,0 +1,38 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: imageclassfn
+  labels:
+    app: imageclassfn
+spec:
+  type: ClusterIP 
+  ports:
+  - port: 5000
+    targetPort: 5000
+    protocol: TCP
+  selector:
+    app: imageclassfn
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: imageclassfn
+  labels:
+    app: resnimageclassfnet18
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: imageclassfn
+  template:
+    metadata:
+      labels:
+        app: imageclassfn
+    spec:
+      #runtimeClassName: kontain
+      containers:
+      - name: imageclassfn
+        image: docker.io/library/resnet18:latest
+        ports:
+        - containerPort: 5000
