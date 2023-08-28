@@ -13,7 +13,7 @@ cd models
 make download-llama2-7b
 ```
 
-Step 2:
+# run example
 ```bash
 cd py9-ctransformers
 
