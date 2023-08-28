@@ -1,0 +1,7 @@
+(llamacpp) ubuntu@ip-172-31-10-140:~/snapdemos/py7-llama-cpp-qna$ make run_program
+/opt/kontain/bin/km --mgtpipe=/tmp/mgtpipe /home/ubuntu/.virtualenvs/llamacpp/bin/python3 app.py
+16:02:05.571903 km_mgt_init          168  km      bind failure: /tmp/mgtpipe: Address already in use
+LLAMA_ASSERT: llama-util.h:101: ret == 0
+16:02:06.076380 km_dump_core         878  vcpu-0  Writing coredump to './kmcore'
+16:02:08.521815 km_deliver_signal    624  vcpu-0  guest: Terminated by signal: Aborted (core dumped)
+make: *** [Makefile:11: run_program] Aborted

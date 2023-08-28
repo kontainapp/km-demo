@@ -1,0 +1,6 @@
+(llamacpp) ubuntu@ip-172-31-10-140:~/snapdemos/py7-llama-cpp-qna$ make run_test
+/opt/kontain/bin/km /home/ubuntu/.virtualenvs/llamacpp/bin/python3 test.py
+LLAMA_ASSERT: llama-util.h:101: ret == 0
+16:00:23.224358 km_dump_core         878  vcpu-0  Writing coredump to './kmcore'
+16:00:25.857016 km_deliver_signal    624  vcpu-0  guest: Terminated by signal: Aborted (core dumped)
+make: *** [Makefile:7: run_test] Aborted

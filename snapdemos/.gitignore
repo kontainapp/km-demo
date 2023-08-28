@@ -1,0 +1,9 @@
+.bin
+.pth
+.cog/*
+/__pycache__/*
+*.pyc
+weights/*
+kmsnap
+kmsnap.conf
+kmcore

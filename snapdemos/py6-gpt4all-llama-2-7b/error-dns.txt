@@ -1,0 +1,59 @@
+/opt/kontain/bin/km --mgtpipe=/tmp/mgtpipe /home/ubuntu/.virtualenvs/gpt4all/bin/python3 app.py
+Traceback (most recent call last):
+  File "/home/ubuntu/.virtualenvs/gpt4all/lib/python3.10/site-packages/urllib3/connection.py", line 174, in _new_conn
+    conn = connection.create_connection(
+  File "/home/ubuntu/.virtualenvs/gpt4all/lib/python3.10/site-packages/urllib3/util/connection.py", line 72, in create_connection
+    for res in socket.getaddrinfo(host, port, family, socket.SOCK_STREAM):
+  File "/usr/lib/python3.10/socket.py", line 955, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+socket.gaierror: [Errno -3] Temporary failure in name resolution
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/ubuntu/.virtualenvs/gpt4all/lib/python3.10/site-packages/urllib3/connectionpool.py", line 703, in urlopen
+    httplib_response = self._make_request(
+  File "/home/ubuntu/.virtualenvs/gpt4all/lib/python3.10/site-packages/urllib3/connectionpool.py", line 386, in _make_request
+    self._validate_conn(conn)
+  File "/home/ubuntu/.virtualenvs/gpt4all/lib/python3.10/site-packages/urllib3/connectionpool.py", line 1042, in _validate_conn
+    conn.connect()
+  File "/home/ubuntu/.virtualenvs/gpt4all/lib/python3.10/site-packages/urllib3/connection.py", line 363, in connect
+    self.sock = conn = self._new_conn()
+  File "/home/ubuntu/.virtualenvs/gpt4all/lib/python3.10/site-packages/urllib3/connection.py", line 186, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPSConnection object at 0x7ffdcbf4f0>: Failed to establish a new connection: [Errno -3] Temporary failure in name resolution
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/ubuntu/.virtualenvs/gpt4all/lib/python3.10/site-packages/requests/adapters.py", line 487, in send
+    resp = conn.urlopen(
+  File "/home/ubuntu/.virtualenvs/gpt4all/lib/python3.10/site-packages/urllib3/connectionpool.py", line 787, in urlopen
+    retries = retries.increment(
+  File "/home/ubuntu/.virtualenvs/gpt4all/lib/python3.10/site-packages/urllib3/util/retry.py", line 592, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='gpt4all.io', port=443): Max retries exceeded with url: /models/models.json (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7ffdcbf4f0>: Failed to establish a new connection: [Errno -3] Temporary failure in name resolution'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/ubuntu/tmp/py5-gpt4all-llama-2-7b/app.py", line 27, in <module>
+    model = GPT4All("models/ggml-model-gpt4all-falcon-q4_0.bin")
+  File "/home/ubuntu/.virtualenvs/gpt4all/lib/python3.10/site-packages/gpt4all/gpt4all.py", line 87, in __init__
+    self.config: ConfigType = self.retrieve_model(
+  File "/home/ubuntu/.virtualenvs/gpt4all/lib/python3.10/site-packages/gpt4all/gpt4all.py", line 135, in retrieve_model
+    available_models = GPT4All.list_models()
+  File "/home/ubuntu/.virtualenvs/gpt4all/lib/python3.10/site-packages/gpt4all/gpt4all.py", line 107, in list_models
+    return requests.get("https://gpt4all.io/models/models.json").json()
+  File "/home/ubuntu/.virtualenvs/gpt4all/lib/python3.10/site-packages/requests/api.py", line 73, in get
+    return request("get", url, params=params, **kwargs)
+  File "/home/ubuntu/.virtualenvs/gpt4all/lib/python3.10/site-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/home/ubuntu/.virtualenvs/gpt4all/lib/python3.10/site-packages/requests/sessions.py", line 587, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/home/ubuntu/.virtualenvs/gpt4all/lib/python3.10/site-packages/requests/sessions.py", line 701, in send
+    r = adapter.send(request, **kwargs)
+  File "/home/ubuntu/.virtualenvs/gpt4all/lib/python3.10/site-packages/requests/adapters.py", line 520, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPSConnectionPool(host='gpt4all.io', port=443): Max retries exceeded with url: /models/models.json (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7ffdcbf4f0>: Failed to establish a new connection: [Errno -3] Temporary failure in name resolution'))
+make: *** [Makefile:2: run_program] Error 1

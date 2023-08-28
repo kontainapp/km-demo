@@ -1,0 +1,5 @@
+/opt/kontain/bin/km /home/ubuntu/.virtualenvs/ctransformers/bin/python3 test.py
+LLAMA_ASSERT: /home/runner/work/ctransformers/ctransformers/models/ggml/llama-util.h:82: ret == 0
+15:03:11.349527 km_dump_core         878  33499.vcpu-0  Writing coredump to './kmcore'
+15:03:11.473144 km_deliver_signal    624  33499.vcpu-0  guest: Terminated by signal: Aborted (core dumped)
+make: *** [Makefile:2: run_test] Aborted

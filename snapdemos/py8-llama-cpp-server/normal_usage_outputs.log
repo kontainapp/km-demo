@@ -1,0 +1,19 @@
+sudo tcpdump -i lo  -s 0 -A 'tcp dst port 80 or tcp dst port 8000 and tcp[((tcp[12:1] & 0xf0) >> 2):4] = 0x47455420 or tcp[((tcp[12:1] & 0xf0) >> 2):4] = 0x504F5354'
+
+request:
+POST /v1/completions HTTP/1.1
+Host: localhost:8000
+User-Agent: OpenAI/v1 PythonBindings/0.27.9
+Accept-Encoding: gzip, deflate
+Accept: */*
+Connection: keep-alive
+X-OpenAI-Client-User-Agent: {"bindings_version": "0.27.9", "httplib": "requests", "lang": "python", "lang_version": "3.10.12", "platform": "Linux-5.19.0-1025-aws-x86_64-with-glibc2.35", "publisher": "openai", "uname": "Linux 5.19.0-1025-aws #26~22.04.1-Ubuntu SMP Mon Apr 24 01:58:15 UTC 2023 x86_64 x86_64"}
+Authorization: Bearer sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+Content-Type: application/json
+Content-Length: 85
+
+{"model": "text-davinci-003", "prompt": "Once upon a time, ", "max_tokens": 5}
+
+
+response:
+{"id":"cmpl-505fc344-6403-4baf-a2fd-9cea23147fd6","object":"text_completion","created":1692938928,"model":"text-davinci-003","choices":[{"text":" over the lazy dog.","index":0,"logprobs":null,"finish_reason":"length"}],"usage":{"prompt_tokens":8,"completion_tokens":5,"total_tokens":13}}
