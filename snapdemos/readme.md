@@ -11,10 +11,9 @@ to run them in a few different ways.
 # download the llama2 models first
 cd models
 make download-llama2-7b
-```
+
 
 # run example
-```bash
 cd py9-ctransformers
 
 # 1 time step - install virtual environment
