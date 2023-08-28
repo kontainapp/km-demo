@@ -5,23 +5,30 @@ The usual huggingface method doesn't support these big LLMs so several projects 
 to run them in a few different ways.
 
 # steps to reproduce
-## Example 1: using CTransformers to run llama2 GGML model
+## setup virtual environment
+```bash
+# setup virtual environment structure
+# 1 time step - install virtual environment
+mkdir -p ~/.virtualenvs
+```
 
+## Example 1: using CTransformers to run llama2 GGML model
 ```bash
 # download the llama2 models first
 cd models
 make download-llama2-7b
 
-
-# run example
+# example 1
 cd py9-ctransformers
 
-# 1 time step - install virtual environment
-mkvirtualenv ctransformers
-pip install -r requirements.txt
+# 1 time step - create virtual environment
+python3 -m venv ~/.venvs/ctransformers
 
-# if virtual environment is installed, virtual environment
-workon ctransformers
+# activate virtual environment
+~/.venvs/ctransformers/activate
+
+# 1-time step - install packages into virtual environment
+pip install -r requirements.txt
 
 # to see it working
 make run_test_with_py
@@ -34,12 +41,14 @@ make run_test
 ```bash
 cd py7-llama-cpp-qna
 
-# 1-time step: install virtual environment
-mkvirtualenv llamacpp
-pip install -r requirements.txt
+# 1 time step - create virtual environment
+python3 -m venv ~/.venvs/llamacpp
 
-# if virtual environment is installed, virtual environment
-workon llamacpp
+# activate virtual environment
+~/.venvs/llamacpp/activate
+
+# 1-time step - install packages into virtual environment
+pip install -r requirements.txt
 
 # to see it working
 make run_test_with_py
@@ -52,12 +61,14 @@ make run_test
 ```bash
 cd py6-gpt4all-llama-2-7b
 
-# 1-time step: install virtual environment
-mkvirtualenv gpt4all
-pip install -r requirements.txt
+# 1 time step - create virtual environment
+python3 -m venv ~/.venvs/gpt4all
 
-# if virtual environment is installed, virtual environment
-workon gpt4all
+# activate virtual environment
+~/.venvs/gpt4all/activate
+
+# 1-time step - install packages into virtual environment
+pip install -r requirements.txt
 
 # run this server in plain python
 make run_program_with_py
@@ -74,6 +85,15 @@ make run_program
 
 ## Example 4: using lit-gpt (use pytorch lightning to run various LLM models)
 ```bash
+# 1 time step - create virtual environment
+python3 -m venv ~/.venvs/litgpt
+
+# activate virtual environment
+~/.venvs/litgpt/activate
+
+# 1-time step - install packages into virtual environment
+pip install -r requirements.txt
+
 # setup models
 make download-stablelm-3b
 make convert-stablelm-3b
