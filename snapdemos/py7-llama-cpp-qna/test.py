@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 start=time.time()
 # load gpt4
-llm = Llama(model_path="models/llama-2-7b.ggmlv3.q4_0.bin")
+llm = Llama(model_path="../models/llama-2-7b.ggmlv3.q4_0.bin")
 
 end=time.time()
 

@@ -13,14 +13,19 @@
 # pip install --index-url https://download.pytorch.org/whl/nightly/cpu --pre 'torch>=2.1.0dev'
 # $ cd src && pip install -r requirements.txt && pip install sentencepiece flask
 #-----------------
+#==================================
+# simple run
+#==================================
+run_test_with_py:
+	python3 test.py
 
-#==================================
-# with flask
-#==================================
 run_test:
 	/opt/kontain/bin/km ~/.virtualenvs/litgpt/bin/python3 test.py
 	# python3 test.py
 
+#==================================
+# with flask
+#==================================
 run_program:
 	/opt/kontain/bin/km --mgtpipe=/tmp/mgtpipe ~/.virtualenvs/litgpt/bin/python3 app.py
 	# python3 app.py

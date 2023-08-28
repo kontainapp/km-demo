@@ -1,3 +1,13 @@
+# install with virtual environment:
+# mkvirtualenv ctransformers
+# or (if installed)
+# workon ctransformers
+
+# pip install -r requirements.txt
+
+run_test_with_py:
+	python3 test.py
+
 run_test:
 	/opt/kontain/bin/km /home/ubuntu/.virtualenvs/ctransformers/bin/python3 test.py
 

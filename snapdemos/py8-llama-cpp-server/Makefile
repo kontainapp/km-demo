@@ -8,11 +8,12 @@ export MODEL=../models/llama-2-7b.ggmlv3.q4_0.bin
 export HOST="0.0.0.0"
 # export KM_MGTDIR=/tmp
 
-run_program:
-	# /opt/kontain/bin/km /home/ubuntu/.virtualenvs/llamacpp/bin/python3 -m llama_cpp.server
-	# /opt/kontain/bin/km /home/ubuntu/.virtualenvs/llamacpp/bin/python3 -m llama_cpp.server
+run_program_with_py:
 	python3 -m llama_cpp.server
 
+run_program:
+	/opt/kontain/bin/km /home/ubuntu/.virtualenvs/llamacpp/bin/python3 -m llama_cpp.server
+	
 snap:
 	/opt/kontain/bin/km_cli -s /tmp/mgtpipe
 

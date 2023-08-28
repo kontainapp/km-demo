@@ -1,5 +1,5 @@
-.bin
-.pth
+*.bin
+*.pth
 .cog/*
 /__pycache__/*
 *.pyc

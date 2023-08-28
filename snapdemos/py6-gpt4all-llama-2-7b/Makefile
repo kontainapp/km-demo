@@ -4,6 +4,9 @@
 
 # https://docs.gpt4all.io/index.html
 
+run_program_with_py:
+	python3 app.py
+
 run_program:
 	/opt/kontain/bin/km /home/ubuntu/.virtualenvs/gpt4all/bin/python3 app.py
 

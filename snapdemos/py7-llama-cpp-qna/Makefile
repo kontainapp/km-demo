@@ -3,9 +3,12 @@
 # pip install -r requirements.txt
 # for qna llamacpp: https://llama-cpp-python.readthedocs.io/en/latest/
 # for generation: https://llama-cpp-python.readthedocs.io/en/latest/api-reference/#llama_cpp.llama.Llama.generate
+
+run_test_with_py:
+	python3 test.py
+
 run_test:
 	/opt/kontain/bin/km /home/ubuntu/.virtualenvs/llamacpp/bin/python3 test.py
-	# python3 test.py
 
 run_program:
 	/opt/kontain/bin/km /home/ubuntu/.virtualenvs/llamacpp/bin/python3 app.py
