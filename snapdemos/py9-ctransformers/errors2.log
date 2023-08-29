@@ -1,0 +1,34 @@
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "test2.py", line 9, in <module>
+    llm = AutoModelForCausalLM.from_pretrained("TheBloke/Llama-2-7B-GGML")
+  File "/home/ubuntu/.venvs/ctransformers/lib/python3.8/site-packages/ctransformers/hub.py", line 149, in from_pretrained
+    config = config or AutoConfig.from_pretrained(
+  File "/home/ubuntu/.venvs/ctransformers/lib/python3.8/site-packages/ctransformers/hub.py", line 48, in from_pretrained
+    cls._update_from_repo(
+  File "/home/ubuntu/.venvs/ctransformers/lib/python3.8/site-packages/ctransformers/hub.py", line 72, in _update_from_repo
+    path = snapshot_download(
+  File "/home/ubuntu/.venvs/ctransformers/lib/python3.8/site-packages/huggingface_hub/utils/_validators.py", line 118, in _inner_fn
+    return fn(*args, **kwargs)
+  File "/home/ubuntu/.venvs/ctransformers/lib/python3.8/site-packages/huggingface_hub/_snapshot_download.py", line 186, in snapshot_download
+    repo_info = api.repo_info(repo_id=repo_id, repo_type=repo_type, revision=revision, token=token)
+  File "/home/ubuntu/.venvs/ctransformers/lib/python3.8/site-packages/huggingface_hub/utils/_validators.py", line 118, in _inner_fn
+    return fn(*args, **kwargs)
+  File "/home/ubuntu/.venvs/ctransformers/lib/python3.8/site-packages/huggingface_hub/hf_api.py", line 1868, in repo_info
+    return method(
+  File "/home/ubuntu/.venvs/ctransformers/lib/python3.8/site-packages/huggingface_hub/utils/_validators.py", line 118, in _inner_fn
+    return fn(*args, **kwargs)
+  File "/home/ubuntu/.venvs/ctransformers/lib/python3.8/site-packages/huggingface_hub/hf_api.py", line 1677, in model_info
+    r = get_session().get(path, headers=headers, timeout=timeout, params=params)
+  File "/home/ubuntu/.venvs/ctransformers/lib/python3.8/site-packages/requests/sessions.py", line 602, in get
+    return self.request("GET", url, **kwargs)
+  File "/home/ubuntu/.venvs/ctransformers/lib/python3.8/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/home/ubuntu/.venvs/ctransformers/lib/python3.8/site-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "/home/ubuntu/.venvs/ctransformers/lib/python3.8/site-packages/huggingface_hub/utils/_http.py", line 63, in send
+    return super().send(request, *args, **kwargs)
+  File "/home/ubuntu/.venvs/ctransformers/lib/python3.8/site-packages/requests/adapters.py", line 519, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: (MaxRetryError('HTTPSConnectionPool(host=\'huggingface.co\', port=443): Max retries exceeded with url: /api/models/TheBloke/Llama-2-7B-GGML/revision/main (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x7ffe45ba90>: Failed to resolve \'huggingface.co\' ([Errno -3] Temporary failure in name resolution)"))'), '(Request ID: 76e880a6-7011-4db7-99de-af33657e2df9)')

@@ -8,7 +8,13 @@
 run_test_with_py:
 	python3 test.py
 
+run_test2_with_py:
+	python3 test2.py
+
 run_test:
+	/opt/kontain/bin/km /home/ubuntu/.virtualenvs/ctransformers/bin/python3 test.py
+
+run_test2:
 	/opt/kontain/bin/km /home/ubuntu/.virtualenvs/ctransformers/bin/python3 test.py
 
 run_program:

@@ -33,11 +33,17 @@ python3 -m venv ~/.venvs/ctransformers
 # 1-time step - install packages into virtual environment
 pip install -r requirements.txt
 
-# to see it working
+# test1 - to see it working
 make run_test_with_py
 
 # to reproduce it with error in km
 make run_test
+
+# test2 - to see it working
+make run_test2_with_py
+
+# to reproduce it with error in km
+make run_test2
 ```
 
 ## Example 2: using llama cpp to run llama2 GGML model
