@@ -7,9 +7,12 @@ to run them in a few different ways.
 # steps to reproduce
 ## setup virtual environment
 ```bash
+# On ubuntu, install latest virtual environment package
+sudo apt-get install python3-venv
+
 # setup virtual environment structure
 # 1 time step - install virtual environment
-mkdir -p ~/.virtualenvs
+mkdir -p ~/.venvs
 ```
 
 ## Example 1: using CTransformers to run llama2 GGML model
@@ -25,7 +28,7 @@ cd py9-ctransformers
 python3 -m venv ~/.venvs/ctransformers
 
 # activate virtual environment
-~/.venvs/ctransformers/activate
+. ~/.venvs/ctransformers/activate
 
 # 1-time step - install packages into virtual environment
 pip install -r requirements.txt
@@ -45,7 +48,7 @@ cd py7-llama-cpp-qna
 python3 -m venv ~/.venvs/llamacpp
 
 # activate virtual environment
-~/.venvs/llamacpp/activate
+. ~/.venvs/llamacpp/activate
 
 # 1-time step - install packages into virtual environment
 pip install -r requirements.txt
@@ -65,7 +68,7 @@ cd py6-gpt4all-llama-2-7b
 python3 -m venv ~/.venvs/gpt4all
 
 # activate virtual environment
-~/.venvs/gpt4all/activate
+. ~/.venvs/gpt4all/activate
 
 # 1-time step - install packages into virtual environment
 pip install -r requirements.txt
@@ -89,7 +92,7 @@ make run_program
 python3 -m venv ~/.venvs/litgpt
 
 # activate virtual environment
-~/.venvs/litgpt/activate
+. ~/.venvs/litgpt/activate
 
 # 1-time step - install packages into virtual environment
 pip install -r requirements.txt
