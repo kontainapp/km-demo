@@ -36,6 +36,7 @@ my_model.load()
 
 end = time.time()
 
+print(f"time to load model:{end-start}")
 
 @app.route('/query')
 def query_example():

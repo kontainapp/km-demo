@@ -16,27 +16,42 @@
 
 # import main Flask class and request object
 from flask import Flask, request
-from llama_cpp import Llama
+import sys, os
 import time
+import json
+from vllm import LLM, SamplingParams
+
+
 
 # create the Flask app
 app = Flask(__name__)
 
-start=time.time()
-# load gpt4
-llm = Llama(model_path="../models/llama-2-7b.ggmlv3.q4_0.bin")
+start = time.time()
 
-end=time.time()
+# Create a sampling params object.
+sampling_params = SamplingParams(temperature=0.8, top_p=0.95, max_tokens=512)
+# Create an LLM.
+#llm = LLM(model="facebook/opt-125m")
+llm = LLM(model="tiiuae/falcon-7b", trust_remote_code=True)
 
-print(f"loaded in:{end-start}")
+end = time.time()
+print(f"time to load model:{end-start}")
 
 @app.route('/query')
 def query_example():
-    question = request.args.get('data')
-    res = llm(f"Q: {question} A: ", max_tokens=64, stop=["Q:", "\n"], echo=True)
-    return str(res)
+    prompt = request.args.get('data')
+
+    # it takes in an array of prompts and returns
+    # an array of results of type RequestOutput
+    outputs = llm.generate([prompt], sampling_params)
+
+    generated_text = outputs[0].outputs[0].text
+    print(f"Prompt: {prompt!r}, Generated text: {generated_text!r}")
+    result = f"{prompt!r} {generated_text!r}"
+
+    # return data+" hello!\n"
+    return json.dumps({"output": result})
 
 if __name__ == '__main__':
     # run app on port 8080
     app.run(host="0.0.0.0", port=8080)
-

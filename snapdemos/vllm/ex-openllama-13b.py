@@ -14,7 +14,7 @@ prompts = [
 sampling_params = SamplingParams(temperature=0.8, top_p=0.95, max_tokens=50)
 
 # Create an LLM.
-llm = LLM(model="openlm-research/open_llama_13b")
+llm = LLM(model="stabilityai/stablelm-tuned-alpha-7b")
 # Generate texts from the prompts. The output is a list of RequestOutput objects
 # that contain the prompt, generated text, and other information.
 outputs = llm.generate(prompts, sampling_params)
