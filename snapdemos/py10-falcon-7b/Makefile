@@ -5,10 +5,10 @@
 
 # pip install -r requirements.txt
 PY=$$(which python3)
-# KM=/opt/kontain/bin/km
-KM=/home/ubuntu/km/build/opt/kontain/bin/km
-# KM_CLI=/opt/kontain/bin/km_cli
-KM_CLI=/home/ubuntu/km/build/opt/kontain/bin/km_cli
+KM=/opt/kontain/bin/km
+# KM=/home/ubuntu/km/build/opt/kontain/bin/km
+KM_CLI=/opt/kontain/bin/km_cli
+# KM_CLI=/home/ubuntu/km/build/opt/kontain/bin/km_cli
 
 run_test_with_py:
 	${PY} test.py
