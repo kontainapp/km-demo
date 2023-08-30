@@ -13,9 +13,6 @@ KM_CLI=/home/ubuntu/km/build/opt/kontain/bin/km_cli
 run_test_with_py:
 	${PY} test.py
 
-run_test2_with_py:
-	${PY} test2.py
-
 run_test:
 	# /opt/kontain/bin/km ${PY} test.py
 	${KM} ${PY} test.py
@@ -25,7 +22,7 @@ run_test2:
 	${KM} ${PY} test2.py
 
 run_program:
-	${KM} ${PY} --mgtpipe=/tmp/mgtpipe app.py
+	${KM} --mgtpipe=/tmp/mgtpipe  ${PY} app.py
 
 snap:
 	${KM_CLI} -s /tmp/mgtpipe
