@@ -13,14 +13,16 @@ KM=/home/ubuntu/km/build/opt/kontain/bin/km
 # KM_CLI=/opt/kontain/bin/km_cli
 KM_CLI=/home/ubuntu/km/build/opt/kontain/bin/km_cli
 
-run_test_with_py:
-	${PY} test.py
+run_test1_with_py:
+	# drop-cache: echo 3 | sudo tee /proc/sys/vm/drop_caches
+	${PY} test1.py
 
 run_test2_with_py:
+	# drop-cache: echo 3 | sudo tee /proc/sys/vm/drop_caches
 	${PY} test2.py
 
 run_test:
-	# /opt/kontain/bin/km ${PY} test.py
+	# /opt/kontain/bin/km ${PY} test1.py
 	${KM} ${PY} test.py
 
 run_test2:
