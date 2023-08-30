@@ -3,6 +3,9 @@
 # or (if installed)
 # workon ctransformers
 
+# ref: https://github.com/marella/ctransformers
+# ref: https://python.langchain.com/docs/integrations/providers/ctransformers
+
 # pip install -r requirements.txt
 PY=$$(which python3)
 # KM=/opt/kontain/bin/km
@@ -25,7 +28,7 @@ run_test2:
 	${KM} ${PY} test2.py
 
 run_program:
-	${KM} ${PY} --mgtpipe=/tmp/mgtpipe app.py
+	${KM} --mgtpipe=/tmp/mgtpipe ${PY} app.py
 
 snap:
 	${KM_CLI} -s /tmp/mgtpipe
