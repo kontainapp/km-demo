@@ -12,7 +12,7 @@ Serverless computing, coupled with established scaling techniques, enhances LLM 
 
 The GGML tensor library, used in projects like llama.cpp, empowers AI workloads on CPUs.  GGML is used to enable large models and high performance on commodity hardware and is utilized by software such as llama.cpp and whisper.cpp, and enabling users on commodity hardware to run highly capable LLM models like llama2 and falcon.
 
-Starting large LLM/Transformer models can take a lot of time [in order of x time/seconds/minutes](https://discuss.huggingface.co/t/why-the-model-loading-of-llama2-is-so-slow/47927), and this issue hinders being able to scale out seamlessly and for using serverless workloads to alleviate Inference serving.
+Starting large LLM/Transformer models can take a lot of time [(in order of 10s of seconds/minutes](https://discuss.huggingface.co/t/why-the-model-loading-of-llama2-is-so-slow/47927), and this issue hinders being able to scale out seamlessly and for using serverless workloads to alleviate Inference serving.
 
 Kontain Monitor solves “cold start” issues, enabling instant scalability/scale from zero for Transformer/LLM CPU workloads, utilizing readily available CPU resources for diverse services. We'll demonstrate this below.
 
