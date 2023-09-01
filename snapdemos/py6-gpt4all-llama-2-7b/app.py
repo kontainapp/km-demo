@@ -18,6 +18,7 @@
 from flask import Flask, request
 from gpt4all import GPT4All
 import time
+import json
 
 # create the Flask app
 app = Flask(__name__)
@@ -33,8 +34,8 @@ print(f"loaded in:{end-start}")
 @app.route('/query')
 def query_example():
     data = request.args.get('data')
-    res = model.generate(data, max_tokens=512)
-    return str(res)
+    output = model.generate(data, max_tokens=512)
+    return json.dumps({"output": str(output)})
 
 if __name__ == '__main__':
     # run app on port 8080

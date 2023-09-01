@@ -30,7 +30,7 @@ app = Flask(__name__)
 start = time.time()
 
 # my_model = litmodel.LitModel(checkpoint_dir=Path("src/checkpoints/stabilityai/stablelm-base-alpha-3b"))
-my_model = litmodel.LitModel(checkpoint_dir=Path("src/checkpoints/openlm-research/open_llama_7b"))
+my_model = litmodel.LitModel(checkpoint_dir=Path("src/checkpoints/lmsys/vicuna-7b-v1.3"))
 
 my_model.load()
 

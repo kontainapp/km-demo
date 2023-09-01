@@ -3,12 +3,14 @@
 # pip install -r requirements.txt
 
 # https://docs.gpt4all.io/index.html
+#
+# unstable server with segmentation faults at times
 
 run_program_with_py:
 	python3 app.py
 
 run_program:
-	/opt/kontain/bin/km /home/ubuntu/.virtualenvs/gpt4all/bin/python3 app.py
+	/opt/kontain/bin/km --mgtpipe=/tmp/mgtpipe /home/ubuntu/.virtualenvs/gpt4all/bin/python3 app.py
 
 snap:
 	/opt/kontain/bin/km_cli -s /tmp/mgtpipe

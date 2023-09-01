@@ -14,7 +14,6 @@
 # limitations under the License.
 #
 
-# import main Flask class and request object
 from flask import Flask, request
 from ctransformers import AutoModelForCausalLM
 import sys, os
@@ -25,24 +24,17 @@ import json
 app = Flask(__name__)
 
 start = time.time()
-# llm = CTransformers(model='/path/to/ggml-gpt-2.bin', model_type='gpt2')
-# llm = CTransformers(model='/path/to/ggml-gpt-2.bin', model_type='gpt2', lib='avx')
-# llm = AutoModelForCausalLM.from_pretrained("../models/llama-2-7b.ggmlv3.q8_0.bin", model_type="llama")
-llm = AutoModelForCausalLM.from_pretrained("TheBloke/Llama-2-7B-GGML")
+model_id = "TheBloke/Llama-2-7B-GGML"
+llm = AutoModelForCausalLM.from_pretrained(model_id)
 end = time.time()
 
-print(f"time to load model: {end-start}")
+print(f"time to load model {model_id}: {end-start}")
 
-
-@app.route('/query')
+@app.route('/infer')
 def query_example():
-    data = request.args.get('data')
-    # output = base.main(prompt="My name is ", 
-    #           checkpoint_dir=Path("src/checkpoints/stabilityai/stablelm-base-alpha-3b"))
-
-    output = llm(data)
-    # return data+" hello!\n"
-    return json.dumps({"output": output})
+  prompt = request.args.get('prompt')
+  result = llm(prompt)
+  return json.dumps({"result": result})
 
 if __name__ == '__main__':
     # run app on port 8080

@@ -13,10 +13,18 @@
 # pip install --index-url https://download.pytorch.org/whl/nightly/cpu --pre 'torch>=2.1.0dev'
 # $ cd src && pip install -r requirements.txt && pip install sentencepiece flask
 #-----------------
+PY=$$(which python3)
+# KM=/opt/kontain/bin/km
+KM=/home/ubuntu/km/build/opt/kontain/bin/km
+# KM_CLI=/opt/kontain/bin/km_cli
+KM_CLI=/home/ubuntu/km/build/opt/kontain/bin/km_cli
+
 #==================================
 # simple run
 #==================================
 run_test_with_py:
+	# before running ensure:
+	# 	make download-stablelm-3b convert-stablelm-3b
 	python3 test.py
 
 run_test:
@@ -27,12 +35,17 @@ run_test:
 # with flask
 #==================================
 run_program:
-	/opt/kontain/bin/km --mgtpipe=/tmp/mgtpipe ~/.virtualenvs/litgpt/bin/python3 app.py
+	${KM} --mgtpipe=/tmp/mgtpipe ${PY} app.py
 	# python3 app.py
 
 response:
 	curl http://localhost:8080/query?data=Home%20is%20where
 
+snap:
+	${KM_CLI} -s /tmp/mgtpipe
+
+run_snap:
+	${KM} ./kmsnap
 
 #==================================
 # setup using CLI for lit-gpt
@@ -178,7 +191,7 @@ predict-stablelm-7b:
 
 
 #-----------------
-# vicuna llm
+# vicuna 7b llm
 #-----------------
 download-vicuna-7b-v1.3:
 	cd src && python scripts/download.py --repo_id lmsys/vicuna-7b-v1.3 --token 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
@@ -188,6 +201,18 @@ convert-vicuna-7b-v1.3:
 
 predict-vicuna-7b-v1.3:
 	cd src && python generate/base.py --prompt "In the morning," --checkpoint_dir checkpoints/lmsys/vicuna-7b-v1.3
+
+#-----------------
+# falcon 7b
+#-----------------
+download-falcon-7b:
+	cd src && python scripts/download.py --repo_id tiiuae/falcon-7b --token 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
+
+convert-falcon-7b:
+	cd src && python scripts/convert_hf_checkpoint.py --checkpoint_dir checkpoints/tiiuae/falcon-7b
+
+predict-falcon-7b:
+	cd src && python generate/base.py --prompt "In the morning," --checkpoint_dir checkpoints/tiiuae/falcon-7b
 
 
 #-----------

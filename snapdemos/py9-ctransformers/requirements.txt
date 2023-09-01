@@ -1,2 +1,2 @@
-ctransformers[cuda]
+ctransformers
 flask

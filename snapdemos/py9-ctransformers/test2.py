@@ -6,8 +6,9 @@ start = time.time()
 # Intel AVX - llm = CTransformers(model='/path/to/ggml-gpt-2.bin', model_type='gpt2', lib='avx')
 # GPU - llm = CTransformers(model='/path/to/ggml-gpt-2.bin', gpu_layers=50)
 # Simple/Download - llm = AutoModelForCausalLM.from_pretrained("TheBloke/Llama-2-7B-GGML", gpu_layers=50)
-print("loading model...")
-llm = AutoModelForCausalLM.from_pretrained("TheBloke/falcon-7b-instruct-GGML")
+model_id = "TheBloke/falcon-7b-instruct-GGML"
+print(f"loading model {model_id}")
+llm = AutoModelForCausalLM.from_pretrained(model_id)
 end = time.time()
 
 print(f"time to load model: {end-start}")

@@ -1,6 +1,9 @@
 from ctransformers import AutoModelForCausalLM
 import time
 
+# load kontain library
+kontain = CDLL("libkontain.so")
+
 start = time.time()
 # Simple/Local - llm = CTransformers(model='/path/to/ggml-gpt-2.bin', model_type='gpt2')
 # Intel AVX - llm = CTransformers(model='/path/to/ggml-gpt-2.bin', model_type='gpt2', lib='avx')
@@ -14,6 +17,10 @@ llm = AutoModelForCausalLM.from_pretrained(model_id)
 end = time.time()
 
 print(f"time to load model: {end-start}")
+
+# make snapshot
+if getenv("MAKE_SNAPSHOT") != None:
+    print(kontain.snapshot("pytorch", "sentiment", 0))
 
 start = time.time()
 print(llm("AI is going to"))
