@@ -1,6 +1,6 @@
 # Instant startup of LLama2/Transformer model service with Kontain Monitor
 ### Starting LLM service without a snapshot
-![Starting LLM service without a snapshot](starting-with-snap.gif)
+![Starting LLM service without a snapshot](starting-without-snap.gif)
 
 ### Starting or Scaling LLM service on a "cold start" instantly with snapshot
 ![Starting or Scaling LLM service on a "cold start" instantly](starting-with-snap.gif)
