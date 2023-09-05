@@ -1,4 +1,8 @@
 # Instant startup of LLama2/Transformer model service with Kontain Monitor
+NOTE: Please note that in the below example, we use Kontain monitor for CPUs (open source release) to create a snapshot of a running LLM service, so that we can instantly start it on a cold start.  This really helps in scaling out LLM Services using existing cloud technologies.
+
+To start an LLM Snapshot "instantly" from a cold start using GPUs, please contact Kontain.
+
 ### Starting LLM service without a snapshot
 ![Starting LLM service without a snapshot](starting-without-snap.gif)
 
