@@ -33,6 +33,7 @@ print(f"time to load model {model_id}: {end-start}")
 @app.route('/infer')
 def query_example():
   prompt = request.args.get('prompt')
+  print(f"received request for inference for prompt: {prompt}")
   result = llm(prompt)
   return json.dumps({"result": result})
 

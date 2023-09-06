@@ -1,5 +1,5 @@
 # install with virtual environment:
-# python -m venv venv
+# python3 -m venv venv
 # or (if installed)
 # source venv/bin/activate
 # pip install -r requirements.txt
