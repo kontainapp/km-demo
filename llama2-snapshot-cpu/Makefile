@@ -8,10 +8,10 @@
 # ref: https://python.langchain.com/docs/integrations/providers/ctransformers
 
 PY=$$(which python3)
-# KM=/opt/kontain/bin/km
-KM=/home/ubuntu/km/build/opt/kontain/bin/km
-# KM_CLI=/opt/kontain/bin/km_cli
-KM_CLI=/home/ubuntu/km/build/opt/kontain/bin/km_cli
+KM=/opt/kontain/bin/km
+# KM=/home/ubuntu/km/build/opt/kontain/bin/km
+KM_CLI=/opt/kontain/bin/km_cli
+# KM_CLI=/home/ubuntu/km/build/opt/kontain/bin/km_cli
 
 # cd ~/km-demo/llama2-snapshot-cpu
 # source venv/bin/activate
