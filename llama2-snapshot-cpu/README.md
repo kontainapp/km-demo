@@ -104,6 +104,9 @@ Below we show some loading times for models using CTransformers.  Please note th
 
 
 ## Using Kontain Monitor to “Instantly” start the model service
+
+#### Capturing the LLM Model Snapshot
+
 [Kontain Monitor](https://github.com/kontainapp/km) can be used to start these models almost “instantly” even on cold starts.  Below we show an example of how to do this.
 
 ```bash
@@ -135,7 +138,7 @@ By using the management pipe, this sends a signal to the running flask program t
 
 The Kontain-erized “Snapshot” of a program is the running state of the process that has been captured on disk. It subsequently can be “restored” so that the program can “instantly” start.
 
-“Instantly” start of the flask LLM Service using Kontain Snapshot
+#### “Instastart” the flask LLM Service using the Kontain Snapshot
 
 ```bash
 # in terminal 1
