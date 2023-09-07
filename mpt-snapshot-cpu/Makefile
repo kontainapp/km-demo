@@ -33,6 +33,5 @@ run_snap:
 # /home/ubuntu/km/build/opt/kontain/bin/km_cli ./kmsnap
 
 run_infer:
-	# curl -s -v http://localhost:8080/infer?prompt=SpaceX
+	#curl -s -v http://localhost:8080/infer?prompt=SpaceX%20is%20a%20company
 	http GET localhost:8080/infer prompt=="Once upon a time"
-
