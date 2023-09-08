@@ -1,0 +1,3 @@
+ctransformers
+flask
+httpie
