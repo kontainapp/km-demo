@@ -24,8 +24,8 @@ import json
 app = Flask(__name__)
 
 start = time.time()
-model_id = "TheBloke/MPT-7B-GGML"
-llm = AutoModelForCausalLM.from_pretrained(model_id)
+model_id = "TheBloke/mpt-30B-chat-GGML"
+llm = AutoModelForCausalLM.from_pretrained(model_id, model_file="mpt-30b-chat.ggmlv0.q5_0.bin", model_type="mpt")
 end = time.time()
 
 print(f"time to load model {model_id}: {end-start}")

@@ -1,3 +1,0 @@
-ctransformers
-flask
-httpie
