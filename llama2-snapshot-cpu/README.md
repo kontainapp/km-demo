@@ -1,3 +1,5 @@
+[[TOC]]
+
 # Accelerating Inferencing Services with Kontain
 
 Inferencing—the thing you do with your AI model after it is developed, trained, tested, and ready to deploy to do useful work—is where almost all the money in AI will be made and is certainly where the bulk of the cost of AI will be expended.  The performance, scalability, cost effectiveness, and carbon footprint of inferencing are top of mind issues in the AI industry.
