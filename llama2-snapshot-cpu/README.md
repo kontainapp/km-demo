@@ -1,4 +1,11 @@
-[[TOC]]
+* [Introduction](#accelerating-inferencing-services-with-kontain)
+  * [Unique Challenges](#unique-challenges-for-inferencing-services)
+* [Use-case](#use-case-example)
+  * [Demo: Starting LLM Service without snapshot](#demo-starting-llm-inference-service-llama-2-from-a-cold-start-instantly)
+  * [Demo: Starting LLM Service with snapshot](#demo-starting-llm-inference-service-llama-2-without-a-snapshot)
+  * [Inference Service using Llama2 LLM](#inference-service-using-the-llama2-ggml-model)
+  * [Using Kontain Monitor to “Instantly” start the LLM Service](#using-kontain-monitor-to-instantly-start-the-llm-service)
+* [Summary](#summary)
 
 # Accelerating Inferencing Services with Kontain
 
@@ -44,16 +51,16 @@ NOTE: The example below demonstrates Kontain accelerating an LLM (Llama-2) insta
 
 In addition to Llama v2, we have also provided additional examples for the [Falcon](https://github.com/kontainapp/km-demo/tree/publish/llama2-snaphot-cpu/falcon-snapshot-cpu), MosaicML’s MPT ([7B](https://github.com/kontainapp/km-demo/tree/publish/llama2-snaphot-cpu/falcon-snapshot-cpu) and [30B](https://github.com/kontainapp/km-demo/tree/publish/llama2-snaphot-cpu/mpt-30b-snapshot-cpu)) and Databricks [Dolly v2](https://github.com/kontainapp/km-demo/tree/publish/llama2-snaphot-cpu/dolly-v2-snapshot-cpu) LLM (models) here.
 
-### Starting LLM Inference Service (Llama-2) without a snapshot
+# Use Case example
+## Demo: Starting LLM Inference Service (Llama-2) without a snapshot
 
 ![Starting LLM service without a snapshot](starting-without-snap.gif)
 
-### Starting LLM Inference Service (Llama-2) from a "cold start" "instantly"
+## Demo: Starting LLM Inference Service (Llama-2) from a "cold start" "instantly"
 
 ![Starting or Scaling LLM service on a "cold start" instantly](starting-with-snap.gif)
 
-## Use Case Example
-
+## Description
 To address the shortage of GPU hardware and to better leverage the relatively unlimited CPU capacity for LLM workloads, the GGML tensor library, used in projects like llama.cpp/CTransformers etc., empowers AI workloads on CPUs.  GGML is used to enable large models and high performance on commodity hardware and is utilized by software such as llama.cpp and whisper.cpp, and enabling users on commodity hardware to run highly capable LLM models like llama2 and falcon.
 
 Starting large LLM/Transformer models can take a lot of time [(in order of 10s of seconds/minutes)](https://discuss.huggingface.co/t/why-the-model-loading-of-llama2-is-so-slow/47927), and this issue hinders being able to scale out seamlessly and for using serverless workloads to alleviate Inference serving.
