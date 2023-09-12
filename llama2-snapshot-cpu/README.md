@@ -1,8 +1,10 @@
 * [Introduction](#accelerating-inferencing-services-with-kontain)
   * [Unique Challenges](#unique-challenges-for-inferencing-services)
 * [Use-case](#use-case-example)
-  * [Demo: Starting LLM Service without snapshot](#demo-starting-llm-inference-service-llama-2-without-a-snapshot)
-  * [Demo: Starting LLM Service with snapshot](#demo-starting-llm-inference-service-llama-2-from-a-cold-start-instantly)
+  * [Demo: Starting Llama2 LLM Service without snapshot](#demo-starting-llm-inference-service-llama-2-without-a-snapshot)
+  * [Demo: Starting Llama2 LLM Service with snapshot](#demo-starting-llm-inference-service-llama-2-from-a-cold-start-instantly)
+  * [Description of example](#description-of-example)
+  * [Load times of other LLMs](#load-times-of-different-llms)
   * [Inference Service using Llama2 LLM](#inference-service-using-the-llama2-ggml-model)
   * [Using Kontain Monitor to “Instantly” start the LLM Service](#using-kontain-monitor-to-instantly-start-the-llm-service)
 * [Summary](#summary)
@@ -60,14 +62,10 @@ In addition to Llama v2, we have also provided additional examples for the [Falc
 
 ![Starting or Scaling LLM service on a "cold start" instantly](starting-with-snap.gif)
 
-## Description
+## Description of example
 To address the shortage of GPU hardware and to better leverage the relatively unlimited CPU capacity for LLM workloads, the GGML tensor library, used in projects like llama.cpp/CTransformers etc., empowers AI workloads on CPUs.  GGML is used to enable large models and high performance on commodity hardware and is utilized by software such as llama.cpp and whisper.cpp, and enabling users on commodity hardware to run highly capable LLM models like llama2 and falcon.
 
 Starting large LLM/Transformer models can take a lot of time [(in order of 10s of seconds/minutes)](https://discuss.huggingface.co/t/why-the-model-loading-of-llama2-is-so-slow/47927), and this issue hinders being able to scale out seamlessly and for using serverless workloads to alleviate Inference serving.
-
-Kontain Monitor solves “cold start” issues, enabling instant scalability/scale from zero for Transformer/LLM CPU workloads, utilizing readily available CPU resources for diverse services. We'll demonstrate this below.
-
-Inference Service endpoints managed by Kontain can near-instantly start processing requests even when there are no pre-warmed instances running.
 
 Below are some examples of the time from a cold start to serve an inference request with and without Kontain.
 
@@ -75,7 +73,9 @@ Please note that a cold start means the time it takes to instantiate the service
 
 Below we show some examples of the load time of some of the most popular LLMs of different sizes, and the load time of the same LLM’s Kontain-erized snapshot.
 
+Inference Service endpoints managed by Kontain can near-instantly start processing requests even when there are no pre-warmed instances running.
 
+## Load times of different LLMs
 
 | Model name(Model Name/Source)                                                                   | Model size (GB) | Model Load Time (seconds) | Model Load Time using Kontain Snapshot(ms) |
 | ------------------------------------------------------------------------------------------------- | ----------------- | --------------------------- | -------------------------------------------- |
