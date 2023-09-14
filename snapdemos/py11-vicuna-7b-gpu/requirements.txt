@@ -1,0 +1,8 @@
+transformers
+torch
+einops
+accelerate
+flask
+httpie
+sentencepiece
+protobuf

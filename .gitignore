@@ -21,4 +21,5 @@ cscope.out
 perf*.data
 perf*.data.old
 *.svg
-venv/
+venv/**
+venv
