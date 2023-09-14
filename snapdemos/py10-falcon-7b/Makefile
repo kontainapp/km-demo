@@ -17,11 +17,7 @@ run_test:
 	# /opt/kontain/bin/km ${PY} test.py
 	${KM} ${PY} test.py
 
-run_test2:
-	# /opt/kontain/bin/km ${PY} test2.py
-	${KM} ${PY} test2.py
-
-run_program:
+run_app:
 	${KM} --mgtpipe=/tmp/mgtpipe  ${PY} app.py
 
 snap:
@@ -30,5 +26,6 @@ snap:
 run_snap:
 	${KM} ./kmsnap
 
-response:
-	curl -s -v http://localhost:8080/query?data=SpaceX
+run_infer:
+	#curl -s -v http://localhost:8080/query?data=SpaceX
+	http GET http://localhost:8080/query data=="Once upon a time"
