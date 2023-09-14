@@ -1,9 +1,8 @@
-# install with virtual environment:
-# mkvirtualenv ctransformers
-# or (if installed)
-# workon ctransformers
-
+# install with virtual environment steps:
+# python3 -m venv venv
+# source venv/bin/activate
 # pip install -r requirements.txt
+
 PY=$$(which python3)
 # KM=/opt/kontain/bin/km
 KM=/home/ubuntu/km/build/opt/kontain/bin/km
