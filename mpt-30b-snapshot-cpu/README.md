@@ -59,6 +59,8 @@ In addition to MosaicML's MPT, we have also provided additional examples for the
 
 ## Demo: Starting LLM Inference Service (mosaicml/mpt-30b-chat) without a snapshot
 
+Please note that the gifs below are slightly sped up for convenience.
+
 ![Starting LLM service without a snapshot](inference-without-snap.gif)
 
 ## Demo: Starting LLM Inference Service (mosaicml/mpt-30b-chat) from a "cold start" "instantly"
@@ -86,8 +88,8 @@ Inference Service endpoints managed by Kontain can near-instantly start processi
 | ------------------------------------------------------------------------------------------------- | ----------------- | --------------------------- | -------------------------------------------- |
 | **[Llama-2-7B-GGML/TheBloke](https://huggingface.co/TheBloke/Llama-2-7B-GGML)**                 | 5.4             | 10.4                      | 200 ms                                     |
 | **[falcon-7b-instruct-GGML/TheBloke](https://huggingface.co/TheBloke/falcon-7b-instruct-GGML)** | 7.6             | 13.66                     | 200 ms                                     |
-| **[MPT-7B-GGML/TheBloke](https://huggingface.co/rustformers/mpt-7b-ggml)**                      | 7               | 8                        | 200 ms                                     |
-| **[MPT-30B-GGML/TheBloke](https://huggingface.co/TheBloke/mpt-30B-chat-GGML)**                  | 20              | 44                       | 300 ms                                     |
+| **[MPT-7B-GGML/TheBloke](https://huggingface.co/rustformers/mpt-7b-ggml)**                      | 7               | 8                         | 200 ms                                     |
+| **[MPT-30B-GGML/TheBloke](https://huggingface.co/TheBloke/mpt-30B-chat-GGML)**                  | 20              | 44                        | 300 ms                                     |
 
 ![LLM and snapshot loading timings](graph.png)
 
