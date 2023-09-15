@@ -226,7 +226,7 @@ By using the management pipe, this sends a signal to the running flask program t
 # "cold" start of the snapshot of the flask program
 /opt/kontain/bin/km ./kmsnap
 
-# it is available for inference "instantly" in this terminal thus avoiding the 23 or 33 second startup cost
+# it is available for inference "instantly" in this terminal thus avoiding the 10s of seconds startup cost
 ```
 
 ```bash
