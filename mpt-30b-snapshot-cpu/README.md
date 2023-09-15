@@ -238,6 +238,6 @@ http GET localhost:8080/infer prompt=="Once upon a time"
 
 # Summary
 
-This shows that Kontain can effectively load the model almost “instantly”, that takes 23 seconds to load on a “cold” start.  This ensures that if the inferencing service needs to scale out, it can do so instantly and be available for inferencing requests almost “instantly” even on cold starts.
+This shows that Kontain can effectively load the model almost “instantly”, that takes 44 seconds to load on a “cold” start.  This ensures that if the inferencing service needs to scale out, it can do so instantly and be available for inferencing requests almost “instantly” even on cold starts.
 
 This effectively ensures that your inferencing services can be readily horizontally scalable and available on CPU resources and be able to “Scale from zero”.
