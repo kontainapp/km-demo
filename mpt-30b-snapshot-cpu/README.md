@@ -89,7 +89,7 @@ Inference Service endpoints managed by Kontain can near-instantly start processi
 | **[MPT-7B-GGML/TheBloke](https://huggingface.co/rustformers/mpt-7b-ggml)**                      | 7               | 8                        | 200 ms                                     |
 | **[MPT-30B-GGML/TheBloke](https://huggingface.co/TheBloke/mpt-30B-chat-GGML)**                  | 20              | 44                       | 300 ms                                     |
 
-![LLM and snapshot loading timings](llm-snap-loading-times.png)
+![LLM and snapshot loading timings](graph.png)
 
 ## Inference service using the MosaicML MPT-30B model
 
