@@ -22,7 +22,7 @@ set -e
 
 CONTAINER=test-app
 
-until $(curl --output /tmp/out.json --silent --fail -X POST -F image=@dog2.jpg 'http://localhost:5000/predict'); do
+until curl --output /tmp/out.json --silent --fail -X POST -F image=@dog2.jpg 'http://localhost:5000/predict'; do
    sleep 0.001
 done
 

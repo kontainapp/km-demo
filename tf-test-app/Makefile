@@ -27,7 +27,7 @@ kontainer-snap: kontainer
 	@rm -rf ${MGMTPIPE_HOST}
 	docker run --runtime=krun -v $$(pwd)/tmp:/mnt:rw \
 		--name test-app-k -d -p 5000:5000 --env=KM_MGTPIPE=${MGMTPIPE} test-app-k
-	until $$(curl --output /tmp/out.json --silent --fail -X POST -F image=@dog2.jpg 'http://localhost:5000/predict'); do sleep 0.1; done
+	until curl --output /tmp/out.json --silent --fail -X POST -F image=@dog2.jpg 'http://localhost:5000/predict'; do sleep 0.1; done
 	jq . /tmp/out.json
 	sudo /opt/kontain/bin/km_cli -s ${MGMTPIPE_HOST} -t
 	while [ -n "$(docker ps -f name=test-app-k -q)" ]; do sleep 1; done

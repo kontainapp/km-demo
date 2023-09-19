@@ -20,7 +20,7 @@
 set -e
 [ "$TRACE" ] && set -x
 
-until $(curl --output /tmp/out.json --silent --fail http://localhost:8080/); do
+until curl --output /tmp/out.json --silent --fail http://localhost:8080/; do
    sleep 0.001
 done
 

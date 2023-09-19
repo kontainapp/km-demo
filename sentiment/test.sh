@@ -23,7 +23,7 @@ set -e
 CONTAINER=test-app
 URL=${1}
 
-until $(curl --output out.json --silent --fail -XGET -H "Content-Type: application/json" -H "Accept: application/json" http://localhost:5000/${URL} -d '{"content":"The dog is very polite"}'); do
+until curl --output out.json --silent --fail -XGET -H "Content-Type: application/json" -H "Accept: application/json" http://localhost:5000/${URL} -d '{"content":"The dog is very polite"}'; do
    sleep 0.001
 done
 

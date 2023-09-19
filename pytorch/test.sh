@@ -22,7 +22,7 @@ set -e
 
 CONTAINER=test-app
 
-until $(curl --output out.json --silent --fail --get --data-urlencode "data=this is a good piece of cake" http://127.0.0.1:8080/query); do
+until curl --output out.json --silent --fail --get --data-urlencode "data=this is a good piece of cake" http://127.0.0.1:8080/query; do
    sleep 0.001
 done
 

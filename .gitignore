@@ -23,3 +23,8 @@ perf*.data.old
 *.svg
 **/venv
 **/.venv
+**/bin
+**/lib
+**/lib64
+**/pyvenv.cfg
+**/share
