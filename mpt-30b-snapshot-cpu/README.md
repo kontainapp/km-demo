@@ -105,7 +105,8 @@ For more information on how to use CTransformers with [LangChain](https://python
 
 Below we show a simple Flask application that enables inferencing using the [mosaicml/mpt-30b-chat](https://huggingface.co/mosaicml/mpt-30b-chat) model.  We assume that the model is available on a local storage.
 
-As can be seen, this also lends itself quite nicely to being used in a “functions as a service” platform that can scale up and down based on demand.
+As can be seen, this also lends itself quite nicely to
+an Inference Service that is as efficient and performant as possible for both its consumers and its providers.
 
 ```python
 from flask import Flask, request
@@ -178,13 +179,11 @@ To get an inference from the above service we can do the following:
 {"result": " there lived two brothers...
 ```
 
-As can be seen, it took about 44 seconds to load the model the first time from a “cold” start.
+As can be seen, it took about 44 seconds to load the model the first time from a cold start.
 
 If you repeat the same exercise with other LLMs you will see similar results.  The table above shows the different models and their loading times.
 
-When “Scaling up” (adding newer instances of the service) the cluster in say Kubernetes or other “Functions as a service” orchestration systems, this can add up and really make a difference in the user experience during scaleout.
-
-## Using Kontain Monitor to “Instantly” start the LLM Service
+## Using Kontain to Instantly start the LLM Service
 
 #### Capturing the LLM Service Snapshot
 
@@ -206,8 +205,8 @@ WARNING: This is a development server. Do not use it in a production deployment.
  * Running on http://127.0.0.1:8080
  * Running on http://172.31.4.32:8080
 ```
+Once the service is ready to receive traffic, take a Kontain snapshot of the service as shown below.
 
-Then, once the service is “ready” to receive traffic, we take a Kontainer-ized “Snapshot” of the service as shown below:
 
 ```bash
 # in terminal 2
@@ -218,11 +217,12 @@ ls -l kmsnap
 -rw------- 1 ubuntu ubuntu ... Aug 30 19:45 kmsnap
 ```
 
-By using the management pipe, this sends a signal to the running flask program to create a snapshot of the running program.  This causes the service to exit after dumping a Kontain-erized “Snapshot” of the service having been written to disk as “kmsnap” as shown below.
+The management pipe sends a signal to the running flask program to create a snapshot of the running program. This causes the service to exit after dumping a Kontain snapshot of the service to disk as “kmsnap” as shown below.
 
-**The Kontain-erized snapshot of a program is the running state of the process that has been captured on disk as an OCI-standard container. It subsequently can be restored so that the program can start extremely quickly.**
+The Kontain snapshot of a program is the running state of the process that can be packaged as an OCI-standard container image.
+Instances of that container can subsequently be instantiated extremely quickly.
 
-#### “Instant” start of the flask LLM Service using the Kontain Snapshot
+#### Instant start of the flask LLM Service using the Kontain snapshot
 
 ```bash
 # in terminal 1
@@ -242,6 +242,8 @@ http GET localhost:8080/infer prompt=="Once upon a time"
 
 # Summary
 
-This shows that Kontain can effectively load the model almost “instantly”, that takes 44 seconds to load on a “cold” start.  This ensures that if the inferencing service needs to scale out, it can do so instantly and be available for inferencing requests almost “instantly” even on cold starts.
+Inferencing is the workhorse of AI, and Inference Services are where much of the inferencing work is done.  Today's Inferencing Services are incredibly inefficient and full of unnecessary performance compromises.
 
-This effectively ensures that your inferencing services can be readily horizontally scalable and available on CPU resources and be able to “Scale from zero”.
+As shown above, Kontain software can solve the vexing weaknesses of Inferencing Services.  By removing the excessive time and resource waste inherent in today's Inferencing Services, providers can deliver to their customers better and more consistent performance experiences, and can deliver to their organizations more revenue while consuming fewer resources. 
+
+The examples above demonstrate how Kontain can be used to achieve these results for CPU-based Inferencing Instances.  Similar, and in some cases more dramatic, benefits can also be achieved using Kontain's software for GPU-based Inferencing Instances.  If you'd like to speak with us about our GPU- or CPU-based software solutions, please contact us at kontain.ai.
