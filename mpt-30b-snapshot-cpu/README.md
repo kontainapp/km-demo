@@ -1,4 +1,6 @@
-* [Introduction](#accelerating-inferencing-services-with-kontain)
+# Accelerating Inferencing Services with Kontain
+
+* [Introduction](#introduction)
   * [Unique Challenges](#unique-challenges-for-inferencing-services)
 * [Use-case](#use-case-example)
   * [Demo: Starting mosaicml/mpt-30b LLM Service without snapshot](#demo-starting-llm-inference-service-mosaicmlmpt-30b-chat-without-a-snapshot)
@@ -11,7 +13,7 @@
     * [“Instant” start of the flask LLM Service using the Kontain Snapshot](#instant-start-of-the-flask-llm-service-using-the-kontain-snapshot)
 * [Summary](#summary)
 
-# Accelerating Inferencing Services with Kontain
+## Introduction
 
 Inferencing—the thing you do with your AI model after it is developed, trained, tested, and ready to deploy to do useful work—is where almost all the money in AI will be made and is certainly where the bulk of the cost of AI will be expended.  The performance, scalability, cost effectiveness, and carbon footprint of inferencing are top of mind issues in the AI industry.
 
@@ -26,7 +28,7 @@ Delivering an Inferencing Service presents three particularly difficult challeng
 1. Response time:  Inference Services must deliver consistently quick response latency.  Unfortunately, the time to load an Inferencing Instance onto hardware, then warm up the needed software layers to make the model ready to serve, is generally tens of seconds and sometimes minutes.  This makes it impossible to deliver adequate response latency without having the Inferencing Instance running and pre-warmed before it is called.
 2. Wasted resources:  Organizations running Inference Services complain of extremely low utilization.  A set of hardware resources (CPU, memory, GPU, etc) upon which an Inferencing Instance can be instantiated can be said to be in one of three states:  (i) Fulfilling an inference request, (ii) ready to fulfill an inference request but with no active request to serve, and (iii) getting ready to fulfill an inference request.  Only the first of these states is desirable for both the provider of the Inference Service and its consumers.  The second state is fine for the consumers, but extremely wasteful for the Inferencing Service provider; money is being burned while no useful work is being done.  The third state is where the consumer is angrily waiting for a response and the service provider is rushing to get ready, a state during which neither party is happy.
 
-More than 90% of total hardware cycles, and the electricity burned, can be wasted.  The result: most commercial Inferencing Services generate less revenue than it costs to deliver the service.
+   More than 90% of total hardware cycles, and the electricity burned, can be wasted.  The result: most commercial Inferencing Services generate less revenue than it costs to deliver the service.
 
 3. Limited hardware availability:  There is a severe shortage of GPUs that is forecast to continue for the foreseeable future.  The explosive demand for AI computation, combined with the shortage of hardware, have accentuated the premium on solving inefficiencies.
 
@@ -63,15 +65,15 @@ Please note that the gifs below are slightly sped up for convenience.
 
 ![Starting LLM service without a snapshot](inference-without-snap.gif)
 
-## Demo: Starting LLM Inference Service (mosaicml/mpt-30b-chat) from a "cold start" "instantly"
+## Demo: Starting LLM Inference Service (mosaicml/mpt-30b-chat) from a cold start "instantly"
 
-![Starting or Scaling LLM service on a "cold start" instantly](inference-with-snap.gif)
+![Starting or Scaling LLM service on a cold start instantly](inference-with-snap.gif)
 
 ## Description of example
 
 To address the shortage of GPU hardware and to better leverage the relatively unlimited CPU capacity for LLM workloads, the GGML tensor library, used in projects like llama.cpp/CTransformers etc., empowers AI workloads on CPUs.  GGML is used to enable large models and high performance on commodity hardware and is utilized by software such as llama.cpp and whisper.cpp, and enabling users on commodity hardware to run highly capable LLM models like llama2 and falcon.
 
-Starting large LLM/Transformer models can take a lot of time [(in order of 10s of seconds/minutes)](https://discuss.huggingface.co/t/why-the-model-loading-of-llama2-is-so-slow/47927), and this issue hinders being able to scale out seamlessly and for using serverless workloads to alleviate Inference serving.
+Starting large LLM/Transformer models can take a lot of time [(in order of 10s of seconds/minutes)](https://discuss.huggingface.co/t/why-the-model-loading-of-llama2-is-so-slow/47927), and this issue hinders being able to scale out seamlessly and for using serverless workloads to a serverless architecture to optimize Inference Services.
 
 Below are some examples of the time from a cold start to serve an inference request with and without Kontain.
 
@@ -79,7 +81,7 @@ Please note that a cold start means the time it takes to instantiate the service
 
 Below we show some examples of the load time of some of the most popular LLMs of different sizes, and the load time of the same LLM’s Kontain-erized snapshot.
 
-Inference Service endpoints managed by Kontain can near-instantly start processing requests even when there are no pre-warmed instances running.
+Instances managed by Kontain can near-instantly start processing requests even when there are no pre-warmed instances running.
 
 ## Load times of different LLMs
 
@@ -95,7 +97,7 @@ Inference Service endpoints managed by Kontain can near-instantly start processi
 
 ## Inference service using the MosaicML MPT-30B model
 
-To show how to use Kontain Monitor to avoid “Cold start” issues with your LLM or Transformer models, we will use an example that leverages the CTransformers library.  [CTransformers](https://github.com/marella/ctransformers) is a Python library that provides Python bindings for transformer models implemented in C/C++ using the [GGML](https://github.com/ggerganov/ggml) library.
+To show how to use Kontain to avoid cold start issues with your LLM or Transformer models, we will use an example that leverages the CTransformers library.  [CTransformers](https://github.com/marella/ctransformers) is a Python library that provides Python bindings for transformer models implemented in C/C++ using the [GGML](https://github.com/ggerganov/ggml) library.
 
 It is designed to provide a unified interface for all models and supports a variety of transformer models, including Falcon, GPT-2, GPT-J, GPT-NeoX, LLaMa, MPT, Dolly V2, and StarCoder.
 
