@@ -3,6 +3,12 @@ from flask import Flask, jsonify, request  # import objects from the Flask model
 # from keras.models import load_model
 from transformers import AutoTokenizer, AutoModelForSequenceClassification, TextClassificationPipeline
 
+import argparse
+import os
+from ctypes import *
+
+kontain = CDLL("libkontain.so")
+
 # import torch
 app = Flask(__name__)  # define app using Flask
 
@@ -12,13 +18,15 @@ app = Flask(__name__)  # define app using Flask
 # print(keras.__version__)
 # model = load_model('./tf_model.h5')
 
-tokenizer = AutoTokenizer.from_pretrained("distilbert-base-uncased-finetuned-sst-2-english")
+tokenizer = AutoTokenizer.from_pretrained(
+    "distilbert-base-uncased-finetuned-sst-2-english")
 
 model = AutoModelForSequenceClassification.from_pretrained(
     "distilbert-base-uncased-finetuned-sst-2-english")
 
 device = "cuda:0" if torch.cuda.is_available() else "cpu"
 pipe = TextClassificationPipeline(model=model, tokenizer=tokenizer, device=device)
+
 
 @app.route('/predict', methods=['GET'])
 def predict():
@@ -33,5 +41,24 @@ def predict():
 def index():
     return ""
 
+
+@app.get('/shutdown')
+def shutdown():
+    os.kill(os.getpid(), 2)
+    return ('', 204)
+
+
+@app.get('/snapshot')
+def snapshot():
+    kontain.snapshot("pytorch", "text-generation-gp2", 0)
+    return ('', 204)
+
+
+parser = argparse.ArgumentParser()
+parser.add_argument("-p", "--port", help="port to run server on",
+                    type=int, default=5000)
+args = parser.parse_args()
+
+
 if __name__ == "__main__":
-    app.run(host='0.0.0.0')
+    app.run(host='0.0.0.0', port=args.port)

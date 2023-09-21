@@ -1,8 +1,15 @@
-from flask import Flask, jsonify, request  # import objects from the Flask model
+import argparse
+import os
+from ctypes import *
+
+from flask import (Flask, jsonify,  # import objects from the Flask model
+                   request)
 # from keras.models import load_model
 #from transformers import AutoTokenizer, AutoModelForSequenceClassification, TextClassificationPipeline
 import torch
 from transformers import pipeline, set_seed
+
+kontain = CDLL("libkontain.so")
 
 # import torch
 app = Flask(__name__)  # define app using Flask
@@ -27,8 +34,24 @@ def predict():
 def index():
     return ""
 
+   
+@app.get('/shutdown')
+def shutdown():
+    os.kill(os.getpid(), 2)
+    return ('', 204)
+
+@app.get('/snapshot')
+def snapshot():
+    kontain.snapshot("pytorch", "text-generation-gp2", 0)
+    return ('', 204)
+
+parser = argparse.ArgumentParser()
+parser.add_argument("-p", "--port", help="port to run server on",
+                    type=int, default=5000)
+args = parser.parse_args()
+
 if __name__ == "__main__":
-    app.run(host='0.0.0.0')
+    app.run(host='0.0.0.0', port=args.port)
 
 
 # from transformers import GPT2Tokenizer, GPT2Model
