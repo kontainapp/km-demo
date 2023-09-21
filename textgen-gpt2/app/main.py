@@ -5,8 +5,7 @@ from ctypes import *
 # from keras.models import load_model
 # from transformers import AutoTokenizer, AutoModelForSequenceClassification, TextClassificationPipeline
 import torch
-from flask import (Flask, jsonify,  # import objects from the Flask model
-                   request)
+from flask import Flask, jsonify, request
 from transformers import pipeline, set_seed
 
 # import torch

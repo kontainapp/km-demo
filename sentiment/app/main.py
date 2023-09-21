@@ -3,8 +3,7 @@ import os
 from ctypes import *
 
 import torch
-from flask import (Flask, jsonify,  # import objects from the Flask model
-                   request)
+from flask import Flask, jsonify, request
 # from keras.models import load_model
 from transformers import (AutoModelForSequenceClassification, AutoTokenizer,
                           TextClassificationPipeline)
