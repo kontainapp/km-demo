@@ -1,5 +1,6 @@
 import argparse
 import os
+import sys
 from ctypes import *
 
 # from keras.models import load_model
@@ -57,9 +58,16 @@ def snapshot():
 parser = argparse.ArgumentParser()
 parser.add_argument("-p", "--port", help="port to run server on",
                     type=int, default=5000)
+parser.add_argument("-l", "--load", help="pre-load model",
+                    action="store_true")
+
 args = parser.parse_args()
 
 if __name__ == "__main__":
+    if args.load:
+        print("load completed. Exiting")
+        sys.exit(0)
+
     app.run(host='0.0.0.0', port=args.port)
 
 
