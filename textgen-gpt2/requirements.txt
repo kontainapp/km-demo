@@ -1,4 +1,4 @@
 flask
 jsonify
 transformers
-torch
+torch==2.0.1
