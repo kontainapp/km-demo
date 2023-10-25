@@ -1,12 +1,9 @@
-from ctypes import *
 from os import getenv
 
 import torch
 # from flask import Flask, jsonify, request  # import objects from the Flask model
 # from keras.models import load_model
 from transformers import AutoTokenizer, AutoModelForSequenceClassification, TextClassificationPipeline
-
-kontain = CDLL("libkontain.so")
 
 # app = Flask(__name__)  # define app using Flask
 
@@ -29,6 +26,8 @@ hasil = pipe(content)
 print(hasil)
 
 if getenv("MAKE_SNAPSHOT") != None:
+    from ctypes import CDLL
+    kontain = CDLL("libkontain.so")
     print(kontain.snapshot("pytorch", "sentiment", 0))
 
 content = "The cat is rude"

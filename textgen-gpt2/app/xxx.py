@@ -1,11 +1,8 @@
-from ctypes import *
 from os import getenv
 
 from transformers import AutoTokenizer, AutoModelForSequenceClassification, TextClassificationPipeline
 import torch
 from transformers import pipeline, set_seed
-
-kontain = CDLL("libkontain.so")
 
 device = "cuda:0" # if torch.cuda.is_available() else "cpu"
 generator = pipeline('text-generation', model='gpt2', pad_token_id=50256, device=device)
@@ -16,6 +13,8 @@ output = generator(content, max_length=30, num_return_sequences=1)
 print(output)
 
 if getenv("MAKE_SNAPSHOT") != None:
+    from ctypes import CDLL
+    kontain = CDLL("libkontain.so")
     print(kontain.snapshot("pytorch", "sentiment", 0))
 
 content = "late in the afternoon"
