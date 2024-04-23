@@ -1,0 +1,11 @@
+flask
+jsonify
+transformers
+torch==2.2.1
+pyopenssl
+sentencepiece
+accelerate
+sacremoses
+diffusers
+protobuf
+datasets

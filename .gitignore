@@ -21,6 +21,7 @@ cscope.out
 perf*.data
 perf*.data.old
 *.svg
+**/env-1*
 **/venv
 **/.venv
 **/bin
@@ -28,3 +29,4 @@ perf*.data.old
 **/lib64
 **/pyvenv.cfg
 **/share
+models-test/out.json
