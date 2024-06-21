@@ -1,4 +1,5 @@
 flask
+numpy<2.0.0
 jsonify
 transformers
-torch==2.0.1
+torch==2.2.1
